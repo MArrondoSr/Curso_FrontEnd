@@ -1,0 +1,525 @@
+.header {
+  display: flex;
+  align-items: center;
+  background: #fff;      
+  padding: 12px 20px;    
+  gap: 16px;
+}
+
+.header img {
+  height: 120px;          
+  width: auto;
+}
+
+.header h2 {
+  margin: 0;
+  flex: 1;               
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+  font-weight: 300;
+  font-style: italic;
+  text-shadow: 2px 2px 2px #0f172a;
+  
+}
+
+.header nav {            
+  margin-left: auto;
+}
+
+.lista_nav {
+  display: flex;
+  flex-direction: column;  
+  align-items: flex-end;   
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista_nav a {
+  display: block;
+  text-decoration: none;
+  color: #222;
+  padding: 4px 0;
+}
+
+/* Contenedor: video + texto al lado */
+.reel {
+  display: flex;
+  align-items: stretch;     
+  gap: 12px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border: 5px outset rgba(226, 107, 10, 0.874);
+  border-radius: 2%;
+
+}
+
+/* Aplica a cualquier <video> dentro del aside .reel, aunque no tenga clase */
+.reel video {
+  width: 22vw !important;     
+  height: auto !important;
+  aspect-ratio: 9 / 16;
+  margin-left: 5px;
+  margin-top: 10px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  max-width: none !important;  
+  border: 5px outset rgba(226, 107, 10, 0.874);
+}
+
+.map{
+  border: 5px outset rgba(226, 107, 10, 0.874);
+  background-color: #f5f3b9;
+  width: 22vw;
+  aspect-ratio: 9/9;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.map > section{
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 8px;
+  height: 100%;
+}
+
+.map h2{ margin: 8px 10px 0; 
+font-family: "Passion One", sans-serif;}
+.map iframe{ width:100% !important; height:100% !important; border:0; }
+
+.reel, .map{
+    display: flex;
+    align-items: center;
+
+}
+
+.reel__texto {
+  flex: 1;
+  margin-right: 10px;
+
+}
+
+.left{
+  display: flex;
+  flex-direction: column;
+  width: 25hv;              
+  gap: 12px;
+}
+
+/* Responsive: apilar en pantallas chicas */
+@media (max-width: 700px) {
+  .reel {
+    flex-direction: column;
+  }
+  .reel__video {
+    width: 100%;
+    max-width: 420px; 
+  }
+}
+
+.titulo {
+    font-size: 30px;
+    font-style: italic;
+    color: green;
+}
+
+/*-------------------------------*//* Contenedor del footer como flex con wrap */
+footer{
+  background-color: rgb(15, 180, 64);
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;         
+  align-items: flex-start;
+  gap: 16px;
+}
+
+footer table{
+  order: 0;
+  width: auto;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+footer nav{
+  order: 1;
+  margin-left: auto;        
+}
+footer .lista_nav{
+  display: flex;
+  flex-direction: column;   
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: flex-end;    
+}
+
+footer > p{
+  order: 2;
+  width: 100%;             
+  margin: 0;               
+  padding-top: 6px;
+  text-align: left;
+}
+
+
+/* Responsive: en pantallas chicas apilar */
+@media (max-width: 700px){
+  footer{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  footer nav{
+    width: 100%;
+  }
+}
+
+/*--------------------------------------------------------------------------------------*/
+
+body {
+  font-family: Lato, sans-serif;
+  background: #f4ef6f;
+  margin: 0;
+  padding: 20px 0 40px;
+}
+
+.lead{
+  line-height: 1.3;
+  margin-top: 10px;
+  text-align: justify;      
+  hyphens: auto;             
+}
+.lead::after{                 
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.dropcap{
+  float: left;
+  width: 150px;               
+  height: auto;
+  display: block;
+  margin: 0 12px 8px 0;
+
+}
+
+.texto_presentacion{
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.texto_p1{ font-weight: bold; }
+.texto_p2{ font-style: italic; font-weight: bold; }
+
+/* Mobile: apilar y desactivar shape */
+@media (max-width: 600px){
+  .dropcap{
+    float: none;
+    display: block;
+    margin: 0 0 8px 0;
+    shape-outside: none;
+    -webkit-shape-outside: none;
+  }
+  .lead{ text-align: left; } 
+}
+
+.productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  border: 5px outset rgba(226, 107, 10, 0.874);
+  border-radius: 2%;
+  background-color: #f5f3b9;
+  padding: 2px;
+  justify-content: space-evenly;
+  margin-top: 35px;
+  margin-bottom: 1px;
+
+}
+
+.articulo {
+  display: grid;
+  grid-template-columns: auto 1fr;    
+  grid-template-rows: auto auto;     
+  grid-template-areas:
+    "img desc"
+    "title btn";
+  column-gap: 12px;
+  row-gap: 8px;
+  justify-items: start;
+  align-items: start;
+  background: #fff;
+  color: #000;
+  border: 5px outset rgba(226,107,10,.874);
+  border-radius: 2%;
+  padding: 12px;
+  box-sizing: border-box;
+  max-width: 520px; 
+  flex: 0 1 480px;
+}
+
+.articulo__img {
+  grid-area: img;
+  display: block;
+  width: var(--img-w, 220px);      
+  height: auto;
+  margin: 0;          
+  justify-self: start;
+}
+
+.articulo__desc {
+  grid-area: desc;
+  margin: 0;
+  font: 400 0.95rem/1.4 system-ui, Arial, sans-serif;
+  text-align: left;
+  max-width: 40ch;
+}
+
+.articulo__titulo {
+  grid-area: title;
+  margin: 0;
+  font-family: "Passion One", sans-serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  text-align: left;
+  align-self: end;   
+}
+
+.articulo__btn {
+  grid-area: btn;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  padding: 10px 14px;
+  border-radius: 10px;
+  display: inline-flex;
+  gap: 8px;
+  background: #ffbf00;
+  color: #1a1a1a;
+  border: 1px solid #d6a300;
+  font-weight: 600;
+  justify-self: end;   
+  align-self: end;
+  margin: 0;
+  cursor: pointer;
+}
+
+.articulo__btn i{ font-size: 1.05em; }
+
+.articulo_final{
+  display: grid;
+  grid-template-columns: var(--img-w, 300px) 1fr;    
+  grid-template-rows: auto 1fr auto;     
+  grid-template-areas:
+    "img title"  
+    "img desc"
+    "img btn";
+  gap: 12px 12px; 
+  margin: 0px 45px 3px 45px;
+  background: #fff;
+  color: #000;
+  border: 5px outset rgba(226,107,10,.874);
+  border-radius: 1%;
+  padding: 12px;
+  box-sizing: border-box;
+  flex: 1 1 100%;
+  width: 100%;
+  max-width: none; 
+  align-items: start;
+  --img-w: 300px;
+}
+
+.articulo_final > img{
+  grid-area: img;
+  width: var(--img-w, 300px);
+  height: auto;
+  display: block;
+  justify-self: start;
+}
+
+.articulo_final .articulo__titulo{
+  grid-area: title;      
+  align-self: start;     
+  margin: 0 0 6px 0;
+  font-size: 40px ;
+  color:darkgreen;
+}
+
+.articulo_final .articulo__desc { 
+  grid-area: desc;
+  max-width: none; }
+
+.articulo_final .articulo__btn{
+  grid-area: btn;
+  justify-self: end;
+  align-self: end;
+}
+
+@media (max-width: 600px) {
+  .articulo {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "img"
+      "title"
+      "desc"
+      "btn";
+  }
+  .articulo__img {
+    width: 100%;
+    max-width: 280px;    
+    justify-self: center;
+  }
+  .articulo__btn {
+    justify-self: center; 
+  }
+}
+
+
+/* ---- estilos de Reseñas ---------------*/
+.opiniones {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.opiniones__title {
+  margin: 0 0 12px;
+  font: 700 1.4rem/1.2 system-ui, Arial, sans-serif;
+}
+
+.opiniones__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.opiniones__item {
+  
+}
+
+.opinion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.opinion:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  transform: translateY(-1px);
+}
+
+.opinion__img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.opinion__txt {
+  font: 600 1rem/1.2 system-ui, Arial, sans-serif;
+}
+
+.opiniones__more {
+  margin: 10px 0 0;
+  font: 700 1.4rem/1.2 system-ui, Arial, sans-serif;
+  font-size: 20px;
+  
+}
+
+
+/*------------------ estilos del formulario ---------------------------------*/
+
+.header_form {
+  display: flex;
+  align-items: left;
+  font-family: 'Times New Roman', Times, serif;
+  width: 50vw;
+  background: #61c41b;     
+  padding-left: 20px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  gap: 16px;
+}
+
+.body_form {
+  font-family: Lato, sans-serif;
+  background: #f4ef6f;
+  margin: 0;
+  padding: 20px 20px 24px;
+  background-image:
+    linear-gradient(rgba(255,255,255,.60), rgba(255,255,255,.60)), 
+    url("./imagenes/papel.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: right bottom, right bottom;
+  background-size: 100vw auto, 100vw auto;
+ 
+}
+
+.main_form {
+  font-family: Lato, sans-serif;
+  font-size: 20px;
+  margin-top: 20px;
+  padding: 20px 0 40px;
+}
+
+.btn_form {
+  font-size: 16px;
+  width: 85px;
+  height: 40px;
+  padding: 10px 0 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.input_form {
+  font-family: Lato, sans-serif;
+  margin-top: 20px;
+  margin-left: 5px;
+  border-style: outset;
+  padding: 5px 30px 5px;
+}
+
+/*------------------ estilos de reseñas ---------------------------------*/
+
+.resenas_fondo{
+  background: rgba(0,0,0,.08);     
+  border: 3px solid rgba(0,0,0,.15);
+  border-radius: 20px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+.resenas{
+  display: flex;
+  align-items: flex-start;  
+  gap: 12px;             
+}
+
+.resenas img{
+  display: block;
+  flex: 0 0 auto;           
+}
+
+.resenas p{
+  margin: 0;
+  flex: 1;                 
+  line-height: 1.4;
+}
+
+

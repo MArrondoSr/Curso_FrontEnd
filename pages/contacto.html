@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://kit.fontawesome.com/2ab605f1d6.js" crossorigin="anonymous"></script>
+    <title>Formulario de Contacto</title>
+</head>
+
+<body class="body_form">
+    <header class="header">
+
+        <img src="../imagenes/logo_grafico.jpg" width="400" height="150" alt="" logo grafico">
+
+        <h2>Haga su consulta, respondemos en el día</h2>
+        <nav>
+            <ul class="lista_nav">
+                <li><a href="../index.html" target="_blank"><i class="fa fa-home"></i> Home</a></li>
+                <li> <a href="./documentos/quienes_somos.pdf"><i class="fa-solid fa-clock-rotate-left"></i> Nuestra
+                        historia</a> </li>
+                <a href="https://www.instagram.com/graficagyc400/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram de graficagyc400">
+                    <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    En Instagram @graficagyc400
+                </a>
+
+                <li><a href=""><i class="fa-solid fa-comment"></i> Reseñas</a></li>
+                <li> <a href="mailto:graficopc@gmail.com"><i class="fa-solid fa-envelope"></i> Contacto por mail</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- /*------------------- FIELDSET Y LEGEND AGREGAR -----------AGRUPAR CON <DIv> </DIv> Y QUEDA EN BLOQUE*/
+         etiqueta select con options para combobox --- agregar boton reset-->
+
+    </header>
+    <main class="main_form">
+
+        <form action="https://formspree.io/f/xjkepzkk" method="POST">
+            <fieldset>
+                <legend>Información de contacto</legend>
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input class="input_form" type="text" id="nombre" name="nombre">
+                </div>
+                <div>
+                    <label for="apellido">Apellido:</label>
+                    <input class="input_form" type="text" id="apellido" name="apellido">
+                </div>
+                <div>
+                    <label for="mail">E-mail:</label>
+                    <input class="input_form" type="email" id="mail" name="mail" size="50px"
+                        pattern="^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9. -]+\\. [a-zA-Z]{2,}$.">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Su consulta: <select>
+                        <option value=""> --Seleccione una opción-- </option>
+                        <option value="Presupuesto"> Presupuesto </option>
+                        <option value="Estado de su pedido"> Estado de su pedido </option>
+                        <option value="Otros"> Otros </option>
+
+                    </select>
+                </legend>
+                <textarea class="input_form" name="mensaje" rows="8"
+                    cols="90">Déjenos aquí su consulta, será respondida en el día</textarea>
+            
+            <div>
+                <button  class="btn_form" type="submit">Enviar <i class="fa-solid fa-paper-plane"></i></button>
+                <button  class="btn_form" type="reset">Limpiar <i class="fa-solid fa-trash"></i></button>
+            </div>
+            </fieldset>
+        </form>
+        <table border="4">
+            <caption>Contactos por formulario</caption>
+
+            <tr>
+                <th rowspan="3"><img src="../imagenes/contacto.png" width="80" height="60"></th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Mail</th>
+                <th>Número</th>
+                <th>Comentarios</th>
+
+            </tr>
+            <!-- CONSULTAR: 1 - no puedo usar formspree, bloquea los mails RESUELTO ; 2 - Si está bien la tabla en la página del formulario;
+         3 - Los subtítulos del video (.vtt) no hacen nada. RESUELTO -->
+            <tr>
+
+                <td>Juan</td>
+                <td>Petruzza</td>
+                <td>petruzza@gmail.com</td>
+                <td>11-4407-0891</td>
+                <td>Consultar si esto está bien.</td>
+            </tr>
+            <tr>
+
+                <td>María</td>
+                <td>Carambata</td>
+                <td>carambata@gmail.com</td>
+                <td>11-4407-0892</td>
+                <td>Consultar si esto está bien.</td>
+            </tr>
+        </table>
+    </main>
+    <footer>
+        <table border="2">
+            <caption>Contacto por celular/whatsapp</caption>
+
+            <tr>
+                <th rowspan="3"><img src="../imagenes/wapp.png" width="60" height="60"></th>
+                <th>Nombre</th>
+                <th>Número</th>
+            </tr>
+            <tr>
+                <td>Miguel</td>
+                <td>11-4407-0890</td>
+            </tr>
+            <tr>
+                <td>Alejandro</td>
+                <td>11-4971-7218</td>
+            </tr>
+        </table>
+        <nav>
+            <ul class="lista_nav">
+                <li><a href="../index.html" target="_blank"><i class="fa fa-home"></i> Home</a></li>
+                <li> <a href="./documentos/quienes_somos.pdf"><i class="fa-solid fa-clock-rotate-left"></i> Nuestra
+                        historia</a> </li>
+                <a href="https://www.instagram.com/graficagyc400/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram de graficagyc400">
+                    <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
+                    En Instagram @graficagyc400
+                </a>
+
+                <li><a href=""><i class="fa-solid fa-comment"></i> Reseñas</a></li>
+                <li> <a href="mailto:graficopc@gmail.com"><i class="fa-solid fa-envelope"></i> Contacto por mail</a>
+                </li>
+            </ul>
+        </nav>
+
+        <p>© Miguel Arrondo - 2025 - Todos los derechos reservados</p>
+    </footer>
+</body>
+
+</html>
