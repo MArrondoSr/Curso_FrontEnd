@@ -44,8 +44,71 @@
   padding: 4px 0;
 }
 
+/* ========== Tablet (≤ 768px) ========== */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 14px;
+    gap: 12px;
+  }
+
+  .header img {
+    height: 96px;   /* antes 120px */
+  }
+
+  .header h2 {
+    font-size: 32px;  /* antes 40px */
+  }
+
+  /* Links: mismo layout en columna, pero con más aire y tamaño cómodo */
+  .lista_nav {
+    gap: 6px;
+  }
+  .lista_nav a {
+    padding: 6px 0;
+    font-size: 0.95rem;
+  }
+}
+
+/* ========== Mobile (≤ 480px) ========== */
+@media (max-width: 480px) {
+  /* Apilar: logo arriba, título en el medio, links abajo */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .header img {
+    height: 76px;   /* más chico */
+  }
+
+  .header h2 {
+    font-size: 26px;
+    line-height: 1.2;
+    /* evita desbordes raros en títulos largos */
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* Nav ocupa ancho completo y centra los ítems */
+  .header nav {
+    width: 100%;
+    margin-left: 0;            /* elimina el “empuje” a la derecha */
+  }
+  .lista_nav {
+    align-items: center;       /* centra la columna de links */
+    gap: 4px;
+  }
+  .lista_nav a {
+    padding: 8px 0;
+    font-size: 1rem;           /* un pelín más grande para tap */
+  }
+}
+
+
 /* Contenedor: video + texto al lado */
-.reel {
+/* .reel {
   display: flex;
   align-items: stretch;     
   gap: 12px;
@@ -54,29 +117,28 @@
   margin-top: 10px;
   border: 5px outset rgba(226, 107, 10, 0.874);
   border-radius: 2%;
+} */
 
+.reel {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 10px;
+  
 }
 
 /* Aplica a cualquier <video> dentro del aside .reel, aunque no tenga clase */
 .reel video {
-  width: 22vw !important;     
-  height: auto !important;
+  width: 100%;           
+  height: auto;
   aspect-ratio: 9 / 16;
-  margin-left: 5px;
-  margin-top: 10px;
   object-fit: cover;
-  flex: 0 0 auto;
-  max-width: none !important;  
   border: 5px outset rgba(226, 107, 10, 0.874);
 }
 
 .map{
   border: 5px outset rgba(226, 107, 10, 0.874);
   background-color: #f5f3b9;
-  width: 22vw;
-  aspect-ratio: 9/9;
-  margin-left: 5px;
-  margin-bottom: 5px;
   overflow: hidden;
 }
 
@@ -85,41 +147,68 @@
   grid-template-rows: auto 1fr;
   gap: 8px;
   height: 100%;
+  padding: 8px; 
 }
 
-.map h2{ margin: 8px 10px 0; 
-font-family: "Passion One", sans-serif;}
-.map iframe{ width:100% !important; height:100% !important; border:0; }
-
-.reel, .map{
-    display: flex;
-    align-items: center;
-
+.map h2{ 
+  margin: 0 0 6px 0; 
+  font-family: "Passion One", sans-serif;
 }
+
+.map iframe{ 
+  width:100% !important; 
+  height:100% !important; 
+  border:0; 
+}
+
 
 .reel__texto {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0; 
   margin-right: 10px;
 
 }
 
 .left{
   display: flex;
-  flex-direction: column;
-  width: 25hv;              
+  flex-direction: column;            
   gap: 12px;
+  flex: 0 0 clamp(280px, 26vw, 360px);
 }
 
 /* Responsive: apilar en pantallas chicas */
+
+@media (max-width: 900px){
+  .left{ flex-basis: clamp(240px, 32vw, 320px); }
+}
+
 @media (max-width: 700px) {
   .reel {
     flex-direction: column;
   }
-  .reel__video {
+
+  .left{
+    flex-basis: auto;     
+    width: 100%;
+  }
+
+  .reel__video,
+  .reel video {
     width: 100%;
     max-width: 420px; 
+    margin-inline: auto;
   }
+  .map{ width: 100%; }
+  .map > section{ height: auto; }
+  .map iframe{
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3;    /* un alto razonable en mobile */
+  }
+
+  .reel__texto{ margin-right: 0; }
 }
+
 
 .titulo {
     font-size: 30px;
@@ -361,6 +450,44 @@ body {
   align-self: end;
 }
 
+/* ====== MOBILE: card “articulo_final” apilada ====== */
+@media (max-width: 700px){
+  .articulo_final{
+    grid-template-columns: 1fr;         /* una sola columna */
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "img"
+      "title"
+      "desc"
+      "btn";
+    gap: 10px;                          /* separaciones más cortas */
+    margin: 8px 10px;                   /* márgenes pares en móvil */
+    align-items: start;                 /* evita centrado vertical */
+  }
+
+  .articulo_final > img{
+    width: 100%;                        /* imagen a todo el ancho */
+    max-width: 360px;                   /* límite visual opcional */
+    justify-self: center;               /* centrada */
+  }
+
+  .articulo_final .articulo__titulo{
+    margin: 0;                          /* limpia espacios grandes */
+    font-size: clamp(20px, 5.2vw, 28px);
+    text-align: center;                 /* opcional: centrado */
+  }
+
+  .articulo_final .articulo__desc{
+    max-width: none;                    /* que fluya */
+    text-align: left;
+  }
+
+  .articulo_final .articulo__btn{
+    justify-self: center;               /* botón centrado */
+    width: auto;                        /* no ocupar todo el ancho */
+  }
+}
+
 @media (max-width: 600px) {
   .articulo {
     grid-template-columns: 1fr;
@@ -370,6 +497,7 @@ body {
       "desc"
       "btn";
   }
+
   .articulo__img {
     width: 100%;
     max-width: 280px;    
@@ -541,3 +669,34 @@ body {
 }
 
 
+/* ====== MOBILE: párrafo con dropcap ====== */
+@media (max-width: 700px){
+  /* el contenedor de texto no debe empujar ancho */
+  .reel__texto{ min-width: 0; width: 100%; }
+
+  /* desactivar el float del dropcap y achicarlo */
+  .dropcap{
+    float: none;
+    display: block;
+    width: 88px;            /* ajustá 80–100px a gusto */
+    height: auto;
+    margin: 0 0 8px 0;      /* arriba del texto, sin bordeo */
+    shape-outside: none;
+    -webkit-shape-outside: none;
+  }
+
+  /* el párrafo: permitir cortes */
+  .lead{
+    text-align: left;       /* mejor legibilidad en mobile */
+    hyphens: auto;
+    overflow-wrap: anywhere; /* evita desbordes de palabras largas */
+    word-break: normal;
+  }
+
+  /* tamaño de fuente adaptable */
+  .texto_presentacion{
+    display: block;
+    font-size: clamp(16px, 4.2vw, 18px);
+    line-height: 1.45;
+  }
+}
