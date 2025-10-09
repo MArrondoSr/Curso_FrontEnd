@@ -1,7 +1,8 @@
 .header {
   display: flex;
   align-items: center;
-  background: #fff;      
+  background: #fff; 
+  margin: 0 10px 0 10px;     
   padding: 12px 20px;    
   gap: 16px;
 }
@@ -52,14 +53,13 @@
   }
 
   .header img {
-    height: 96px;   /* antes 120px */
+    height: 96px;  
   }
 
   .header h2 {
-    font-size: 32px;  /* antes 40px */
+    font-size: 32px;  
   }
 
-  /* Links: mismo layout en columna, pero con más aire y tamaño cómodo */
   .lista_nav {
     gap: 6px;
   }
@@ -80,44 +80,29 @@
   }
 
   .header img {
-    height: 76px;   /* más chico */
+    height: 76px;   
   }
 
   .header h2 {
     font-size: 26px;
     line-height: 1.2;
-    /* evita desbordes raros en títulos largos */
     word-break: break-word;
     hyphens: auto;
   }
 
-  /* Nav ocupa ancho completo y centra los ítems */
   .header nav {
     width: 100%;
-    margin-left: 0;            /* elimina el “empuje” a la derecha */
+    margin-left: 0;            
   }
   .lista_nav {
-    align-items: center;       /* centra la columna de links */
+    align-items: center;    
     gap: 4px;
   }
   .lista_nav a {
     padding: 8px 0;
-    font-size: 1rem;           /* un pelín más grande para tap */
+    font-size: 1rem;           
   }
 }
-
-
-/* Contenedor: video + texto al lado */
-/* .reel {
-  display: flex;
-  align-items: stretch;     
-  gap: 12px;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 10px;
-  border: 5px outset rgba(226, 107, 10, 0.874);
-  border-radius: 2%;
-} */
 
 .reel {
   display: flex;
@@ -127,9 +112,9 @@
   
 }
 
-/* Aplica a cualquier <video> dentro del aside .reel, aunque no tenga clase */
 .reel video {
-  width: 100%;           
+  width: 98%;  
+  margin-top: 25px;         
   height: auto;
   aspect-ratio: 9 / 16;
   object-fit: cover;
@@ -139,6 +124,8 @@
 .map{
   border: 5px outset rgba(226, 107, 10, 0.874);
   background-color: #f5f3b9;
+  height: 380px;
+  margin-top: 15px;
   overflow: hidden;
 }
 
@@ -203,7 +190,7 @@
   .map iframe{
     width: 100% !important;
     height: auto !important;
-    aspect-ratio: 4 / 3;    /* un alto razonable en mobile */
+    aspect-ratio: 4 / 3;    
   }
 
   .reel__texto{ margin-right: 0; }
@@ -273,12 +260,13 @@ body {
   font-family: Lato, sans-serif;
   background: #f4ef6f;
   margin: 0;
-  padding: 20px 0 40px;
+  padding: 20px 20px 24px;
 }
 
 .lead{
   line-height: 1.3;
   margin-top: 10px;
+  margin-left: 10px;
   text-align: justify;      
   hyphens: auto;             
 }
@@ -330,7 +318,17 @@ body {
   justify-content: space-evenly;
   margin-top: 35px;
   margin-bottom: 1px;
+}
 
+.productos__heading{
+  flex: 1 1 100%;        
+  text-align: center;   
+  font-family: "Passion One", sans-serif;
+  color:darkgreen;
+  font-weight: 600;
+  font-size: 2.5rem;
+  padding: 8px 12px;
+  margin: 0;  
 }
 
 .articulo {
@@ -375,6 +373,7 @@ body {
   grid-area: title;
   margin: 0;
   font-family: "Passion One", sans-serif;
+  color:darkgreen;
   font-weight: 600;
   font-size: 1.7rem;
   text-align: left;
@@ -453,38 +452,38 @@ body {
 /* ====== MOBILE: card “articulo_final” apilada ====== */
 @media (max-width: 700px){
   .articulo_final{
-    grid-template-columns: 1fr;         /* una sola columna */
+    grid-template-columns: 1fr;        
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
       "img"
       "title"
       "desc"
       "btn";
-    gap: 10px;                          /* separaciones más cortas */
-    margin: 8px 10px;                   /* márgenes pares en móvil */
-    align-items: start;                 /* evita centrado vertical */
+    gap: 10px;                          
+    margin: 8px 10px;                   
+    align-items: start;                 
   }
 
   .articulo_final > img{
-    width: 100%;                        /* imagen a todo el ancho */
-    max-width: 360px;                   /* límite visual opcional */
-    justify-self: center;               /* centrada */
+    width: 100%;                        
+    max-width: 360px;                 
+    justify-self: center;            
   }
 
   .articulo_final .articulo__titulo{
-    margin: 0;                          /* limpia espacios grandes */
+    margin: 0;                          
     font-size: clamp(20px, 5.2vw, 28px);
-    text-align: center;                 /* opcional: centrado */
+    text-align: center;                 
   }
 
   .articulo_final .articulo__desc{
-    max-width: none;                    /* que fluya */
+    max-width: none;                    
     text-align: left;
   }
 
   .articulo_final .articulo__btn{
-    justify-self: center;               /* botón centrado */
-    width: auto;                        /* no ocupar todo el ancho */
+    justify-self: center;               
+    width: auto;                       
   }
 }
 
@@ -570,8 +569,8 @@ body {
 
  @media (max-width: 768px) {
   .opiniones__list {
-    grid-template-columns: 1fr;   /* 1 columna */
-    gap: 10px;                    /* opcional: un pelín menos de gap */
+    grid-template-columns: 1fr;   
+    gap: 10px;                    
   }
 
   /* Ajustes de tamaño/tacto en móvil (opcionales) */
@@ -590,20 +589,6 @@ body {
 
 
 /*------------------ estilos del formulario ---------------------------------*/
-
-
-.header_form {
-  display: flex;
-  align-items: left;
-  font-family: 'Times New Roman', Times, serif;
-  width: 50vw;
-  background: #61c41b;     
-  padding-left: 20px;
-  padding-bottom: 20px;
-  margin-left: 20px;
-  margin-bottom: 30px;
-  gap: 16px;
-}
 
 .body_form {
   font-family: Lato, sans-serif;
@@ -641,13 +626,12 @@ legend{
 
 .form-row{
   display: grid;
-  grid-template-columns: 160px 1fr; /* ancho del label + campo flexible */
+  grid-template-columns: 160px 1fr; 
   gap: 8px 12px;
   align-items: center;
   margin-bottom: 10px;
 }
 
-/* Inputs full width y alineados */
 .input_form,
 .form-row input,
 .form-row select,
@@ -661,13 +645,11 @@ legend{
   font: inherit;
 }
 
-/* Textarea más cómodo y con resize vertical */
 .form-row textarea{
   min-height: 9rem;
   resize: vertical;
 }
 
-/* Botonera */
 .form-actions{
   display: flex;
   gap: 10px;
@@ -678,8 +660,8 @@ legend{
 .btn_form{
   font-size: 1rem;
   padding: 10px 16px;
-  height: auto;     /* no fuerces altura fija */
-  width: auto;      /* dejá que se ajuste al texto */
+  height: auto;    
+  width: auto;      
   border-radius: 10px;
   border: 1px solid #d6a300;
   background: #d6c797;
@@ -717,7 +699,7 @@ legend{
     align-items: stretch;
   }
   .btn_form{
-    width: 100%;               
+    width: 100%;               g
   }
 
   .table-wrap table{
@@ -755,29 +737,26 @@ legend{
 
 /* ====== MOBILE: párrafo con dropcap ====== */
 @media (max-width: 700px){
-  /* el contenedor de texto no debe empujar ancho */
+  
   .reel__texto{ min-width: 0; width: 100%; }
 
-  /* desactivar el float del dropcap y achicarlo */
   .dropcap{
     float: none;
     display: block;
-    width: 88px;            /* ajustá 80–100px a gusto */
+    width: 88px;          
     height: auto;
-    margin: 0 0 8px 0;      /* arriba del texto, sin bordeo */
+    margin: 0 0 8px 0;      
     shape-outside: none;
     -webkit-shape-outside: none;
   }
 
-  /* el párrafo: permitir cortes */
   .lead{
-    text-align: left;       /* mejor legibilidad en mobile */
+    text-align: left;       
     hyphens: auto;
-    overflow-wrap: anywhere; /* evita desbordes de palabras largas */
+    overflow-wrap: anywhere; 
     word-break: normal;
   }
 
-  /* tamaño de fuente adaptable */
   .texto_presentacion{
     display: block;
     font-size: clamp(16px, 4.2vw, 18px);
