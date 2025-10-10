@@ -564,8 +564,8 @@ body {
   gap: 12px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
-
-.opiniones_item {}
+/* 
+.opiniones_item {} */
 
 .opinion {
   display: flex;
@@ -708,7 +708,7 @@ legend {
   width: auto;
   border-radius: 10px;
   border: 1px solid #d6a300;
-  background: #d6c797;
+  background: rgb(109, 243, 149);
   color: #1a1a1a;
   font-weight: 600;
   cursor: pointer;
@@ -749,7 +749,6 @@ legend {
 
   .btn_form {
     width: 100%;
-    g
   }
 
   .table-wrap table {
