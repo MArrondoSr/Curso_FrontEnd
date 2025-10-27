@@ -26,7 +26,7 @@
   margin-left: auto;
 }
 
-.lista_nav {
+#primary-nav .lista_nav {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -36,12 +36,39 @@
   padding: 0;
 }
 
-.lista_nav a {
+#primary-nav .lista_nav a {
   display: block;
   text-decoration: none;
   color: #222;
   padding: 4px 0;
 }
+
+#primary-nav .lista_nav a:hover { background: #f3f4f6; }
+
+/* Botón hamburguesa (oculto en desktop) */
+.hamburger {
+  display: none;
+  width: 40px; height: 40px; padding: 8px;
+  border: 0; background: transparent; cursor: pointer;
+}
+.hamburger:focus { outline: 2px solid #111; outline-offset: 2px; }
+
+/* Icono tres rayas */
+.hamburger-lines,
+.hamburger-lines::before,
+.hamburger-lines::after {
+  display: block; width: 100%; height: 2px; background: #111; content: "";
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+.hamburger-lines { position: relative; }
+.hamburger-lines::before { position: absolute; top: -8px; }
+.hamburger-lines::after  { position: absolute; top:  8px; }
+
+/* Estado "abierto" (transforma a X) */
+.hamburger[aria-expanded="true"] .hamburger-lines { transform: rotate(45deg); }
+.hamburger[aria-expanded="true"] .hamburger-lines::before { transform: rotate(90deg); top: 0; }
+.hamburger[aria-expanded="true"] .hamburger-lines::after { opacity: 0; }
+
 
 @media (max-width: 768px) {
   .header {
@@ -49,22 +76,9 @@
     gap: 12px;
   }
 
-  .header img {
-    height: 96px;
-  }
 
-  .header h2 {
-    font-size: 32px;
-  }
+  #primary-nav .lista_nav a { padding: 12px 14px; }
 
-  .lista_nav {
-    gap: 6px;
-  }
-
-  .lista_nav a {
-    padding: 6px 0;
-    font-size: 0.95rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -74,32 +88,9 @@
     text-align: center;
     gap: 10px;
   }
+  
+  #primary-nav .lista_nav a { padding: 12px 14px; }
 
-  .header img {
-    height: 76px;
-  }
-
-  .header h2 {
-    font-size: 26px;
-    line-height: 1.2;
-    word-break: break-word;
-    hyphens: auto;
-  }
-
-  .header nav {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .lista_nav {
-    align-items: center;
-    gap: 4px;
-  }
-
-  .lista_nav a {
-    padding: 8px 0;
-    font-size: 1rem;
-  }
 }
 
 .inicio {
@@ -788,4 +779,112 @@ legend {
   margin: 0;
   flex: 1;
   line-height: 1.4;
+}
+
+/* Headers y footers con menues en color negro, despues buscar porque volvian al azul por defectod del navegador*/
+.header nav a,
+.header nav a:link,
+.header nav a:visited {
+  color: #111;
+  text-decoration: none;
+}
+.header nav a:hover {
+  background: #f3f4f6;
+}
+
+
+footer a,
+footer a:link,
+footer a:visited {
+  color: #111;
+  text-decoration: none;
+}
+footer a:hover { text-decoration: underline; }
+
+
+/* ===== Drawer lateral en móvil (forzar prioridad) ===== */
+@media (max-width: 768px) {
+
+  /* Estado base del nav: oculto a la derecha como panel fijo */
+  header.header#site-header nav {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: 100vh !important;
+    width: min(85vw, 320px) !important;
+    background: #fff !important;
+    box-shadow: -2px 0 12px rgba(0,0,0,.12) !important;
+    transform: translateX(100%) !important;   /* fuera de pantalla */
+    transition: transform 0.25s ease-out !important;
+    z-index: 10001 !important;               /* por encima del overlay */
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+  }
+
+  /* Contenido en columna */
+  header.header#site-header nav .lista_nav {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 16px !important;
+    margin: 0 !important;
+  }
+
+  /* Estado abierto: entra el panel */
+  header.header#site-header.open nav {
+    transform: translateX(0) !important;
+  }
+
+  /* Overlay clickeable (detrás del panel) */
+  #menu-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0,0,0,.35) !important;
+    z-index: 10000 !important;               /* debajo del nav */
+  }
+}
+
+/* ===== MÓVIL: reordenar header sin ocultar el h2 ===== */
+@media (max-width: 768px) {
+
+  .header {
+    position: relative;
+    display: flex;
+    flex-direction: column;       /* apila elementos verticalmente */
+    align-items: flex-start;
+    padding: 8px 16px 12px;
+  }
+
+  /* Logo más chico */
+  .header img.logo {
+    max-width: 200px;
+    height: auto;
+    margin: 0;
+  }
+
+  /* Subtítulo debajo del logo */
+  .header h2 {
+    font-size: 1.5rem;    
+    margin: 4px 0 0 0;    
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  /* Botón hamburguesa arriba a la derecha */
+  .header .hamburger {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 10002;               /* por encima del logo */
+  }
 }

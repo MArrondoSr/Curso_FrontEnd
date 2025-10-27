@@ -16,25 +16,44 @@
 
 <body>
   <!-- <h1> Proyecto: Plataforma ventas Grafica & Copiado</h1> -->
-  <header class="header">
+  <header class="header" id="site-header">
 
     <img src="./imagenes/logo_grafico.jpg" width="400" height="150" alt="logo grafico">
 
     <h2>Impresos y artes gráficas desde 1990</h2>
-    <nav>
+
+      <button class="hamburger" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menú">
+        <span class="hamburger-lines" aria-hidden="true"></span>
+      </button>
+    <nav id="primary-nav">
       <ul class="lista_nav">
-        <li> <a href="./documentos/quienes_somos.pdf"><i class="fa-solid fa-clock-rotate-left"></i> Nuestra historia</a>
+        <li> 
+          <a href="./documentos/quienes_somos.pdf">
+            <i class="fa-solid fa-clock-rotate-left"></i> Nuestra historia
+          </a>
         </li>
+        <li>
         <a href="https://www.instagram.com/graficagyc400/" target="_blank" rel="noopener noreferrer"
           aria-label="Instagram de graficagyc400">
-          <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>
-          En Instagram @graficagyc400
+          <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>En Instagram @graficagyc400
         </a>
-
-        <li><a href="./pages/resenas.html" target="_blank"><i class="fa-solid fa-comment"></i> Reseñas</a></li>
-        <li><a href="./pages/contacto.html" target="_blank"><i class="fa-solid fa-paper-plane"></i> Haga su
-            consulta</a></li>
-        <li> <a href="mailto:graficopc@gmail.com"><i class="fa-solid fa-envelope"></i> Contacto por mail</a> </li>
+        </li>
+    
+        <li>
+          <a href="./pages/resenas.html" target="_blank">
+            <i class="fa-solid fa-comment"></i> Reseñas
+          </a>
+        </li>
+        <li>
+          <a href="./pages/contacto.html" target="_blank">
+            <i class="fa-solid fa-paper-plane"></i> Haga su consulta
+          </a>
+        </li>
+        <li> 
+          <a href="mailto:graficopc@gmail.com">
+            <i class="fa-solid fa-envelope"></i> Contacto por mail
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -206,6 +225,7 @@
 
     <p>© Miguel Arrondo - 2025 - Todos los derechos reservados</p>
   </footer>
+  <script src="./js/script.js"></script>
 </body>
 
 </html>
