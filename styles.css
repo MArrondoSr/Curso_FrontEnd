@@ -888,3 +888,8 @@ footer a:hover { text-decoration: underline; }
     z-index: 10002;               /* por encima del logo */
   }
 }
+
+ .header.open .hamburger {
+    opacity: 0;
+    pointer-events: none;
+  }
