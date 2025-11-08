@@ -38,7 +38,12 @@
           <i class="fa-brands fa-square-instagram" aria-hidden="true"></i>En Instagram @graficagyc400
         </a>
         </li>
-    
+        <li>
+          <a href="./pages/prod_serv.html" target="_blank">
+            <i class="fa-solid fa-store"></i> Productos y servicios
+          </a>
+        </li>
+
         <li>
           <a href="./pages/resenas.html" target="_blank">
             <i class="fa-solid fa-comment"></i> Reseñas
@@ -55,31 +60,44 @@
           </a>
         </li>
       </ul>
+      <form id="form-custom">
+            <fieldset>
+                <legend>Customize</legend>
+                <div class="form-row">
+                    <label for="nombre">Usuario:</label>
+                    <input class="input_form" type="text" id="nombre" name="nombre">
+                </div>
+                
+            </fieldset>
+            <fieldset>
+                <legend>Su color: <select id="color">
+                        <option value=""> --Seleccione una opción-- </option>
+                        <option value="blue"> Azul </option>
+                        <option value="red">Rojo </option>
+                        <option value="green"> Verde </option>
+                        <option value="yellow"> Amarillo </option>
+                        <option value="none">Original </option>
+
+                    </select>
+                </legend>
+
+                <div class="form_actions">
+                    <button class="btn_form_chico" type="submit">Personalizar</button>
+                </div>
+            </fieldset>
+        </form>
+        <div id="saludo">
+          <div id="mensaje" class="mensaje"></div>
+        <button id="reset" class="btn_form_chico">Cambiar preferencias</button>
+        </div>
+
+
     </nav>
 
   </header>
 
 
-  <!-- -------------SEPARADOR------------------------ -->
-  <aside class="inicio">
-
-    <!-- -------------SEPARADOR------------------------ -->
-    <div class="left">
-      <video class="reel_video" src="./videos/reel.mp4" controls muted autoplay loop>
-        <track src="./videos/reel.vtt" kind="captions" srclang="en" label="English" default>
-      </video>
-      <!-- -------------SEPARADOR------------------------ -->
-
-      <div class="map">
-        <section>
-          <h2>Nuestra ubicación</h2>
-          <h2>ENTREGA SIN CARGO en C.A.B.A. y Zona Norte</h2>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105082.96198496656!2d-58.462583227787306!3d-34.60814242088057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3911f8ab2d%3A0x27b394c2f3d87d2d!2sCaballito%2C%20Buenos%20Aires!5e0!3m2!1sen!2sar!4v1757460806295!5m2!1sen!2sar"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </section>
-      </div>
-    </div>
+  
     <!-- -------------SEPARADOR------------------------ -->
 
     <div class="inicio__texto">
@@ -105,46 +123,42 @@
             relaciona de alguna manera con el sentimiento de aprender, divertirnos e imaginar.</span></br>
         </span>
       </p>
+<!-- -------------SEPARADOR------------------------ -->
+  <aside class="inicio">
 
-      <section class="productos">
+    <!-- -------------SEPARADOR------------------------ -->
+    <div class="left">
+      <video class="reel_video" src="./videos/reel2.mp4" controls muted autoplay loop>
+        <track src="./videos/reel2.vtt" kind="captions" srclang="en" label="English" default>
+      </video>
+    </div>
+      <section class="productos productos--index">
+        <div class="productos__intro">
         <div class="productos__heading">Productos y Servicios</div>
+        <p>Con más de treinta años de experiencia en el rubro gráfico, le ofrecemos a nuestros clientes la mejor calidad y 
+          precios en planillas, rcetarios, turneros, sobres y toda clase de impresos de uso corriente en consultorios y
+        oficinas. Brindamos un servicio personalizado que facilita la reposición de estos insumos.
+      Usted solo tiene que comunicarse con nosotros por cualquiera de los canales disponible (teléfono, whatsapp, mail, 
+      redes sociales) y a partir de ese momento nosotros nos ocupamos de todo.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione perferendis similique error laudantium, vitae aliquam architecto debitis eum. Beatae, atque ratione enim consequuntur fuga corporis optio aliquid vero laudantium deleniti.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda at amet ut nisi necessitatibus beatae omnis earum harum nihil blanditiis iure animi molestiae libero ullam maiores excepturi in, quia soluta?
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, veniam ipsum tempore porro cumque architecto vel sit quia consectetur animi, deleniti neque id nisi optio quas sapiente eaque expedita nemo?
+    </p>
+                <a href="./pages/prod_serv.html" class="articulo__btn">Ver más ofertas
+                  <i class="fa-solid fa-magnifying-glass-arrow-right"></i>
+                </a>
+                </div>
+
         <article class="articulo">
-          <img class="articulo__img" src="./imagenes/recetas.png" width="4898" height="6293" alt="recetas">
+          <img class="articulo__img" src="./imagenes/recetas.png"  alt="recetas">
           <h3 class="articulo__titulo">Recetarios / Blocks</h3>
-          <p class="articulo__desc"><strong><span style="font-size:20px">Oferta 01:</span></strong><br>10 Blocks de 100
+          <p class="articulo__desc"><strong><span style="font-size:20px">Oferta de la semana:</span></strong><br>10 Blocks de 100
             recetarios / orden de laboratorio / notas , (1000 hojas en total).
             Impresos 1/0 tinta negra sobre papel obra de 80 grs., medida 15 x 21 cm. Calidad y buena presentación. <br>
             Incluye diseño y entrega en CABA o Zona Norte. <br><strong><span style="font-size:20px">Precio: $ 60.000.- +
                 IVA</strong></span>
           </p>
           <button class="articulo__btn" type="button">Agregar al carrito<i
-              class="fa-solid fa-cart-shopping"></i></button>
-        </article>
-        <article class="articulo">
-          <img class="articulo__img" src="./imagenes/tarjetas.png" width="5588" height="5470" style="--img-w: 280px"
-            alt="tarjetas">
-          <h3 class="articulo__titulo">Tarjetas Full Color</h3>
-          <p class="articulo__desc"><strong><span style="font-size:20px">Oferta 02:</span> </strong> <br>100 tarjetas
-            impresión laser full color en cartulina 330 grs.
-            Medidas 9 x 5 cm.
-            Excelente calidad y presentación.<br>Incluye diseño y entrega en CABA o Zona Norte.<br><strong><span
-                style="font-size:20px">
-                Precio: $ 25.000.- + IVA</strong></span>
-          </p>
-          <button class="articulo__btn" type="button">Agregar al carrito <i
-              class="fa-solid fa-cart-shopping"></i></button>
-        </article>
-        <article class="articulo_final">
-          <img src="./imagenes/libros.png" alt="libros">
-          <h3 class="articulo__titulo">¡EDITE SU LIBRO!</h3>
-          <h4 class="articulo__subtitulo">(tiradas chicas desde 50 ejemplares)</h4>
-          <p class="articulo__desc"><strong><span style="font-size:20px">Oferta 03:</span> </strong> <br>Impresión
-            de libros desde 50 ejemplares, tamaño 15 x 21 cm., tapa color con o sin solapa, encuadernación binder.
-            Realizamos la edición y corrección de sus originales.<br>Incluye entrega en CABA o Zona
-            Norte.<br><strong><span style="font-size:20px">
-                Precio (orientativo): $ 25.000.- + IVA por ejemplar</strong></span>
-          </p>
-          <button class="articulo__btn" type="button">Agregar al carrito <i
               class="fa-solid fa-cart-shopping"></i></button>
         </article>
 
@@ -184,7 +198,18 @@
       <a href="./pages/resenas.html"><i>Ver todas las reseñas →</i></a>
     </p>
   </section>
+ <!-- -------------SEPARADOR------------------------ -->
 
+      <div class="map">
+        <section>
+          <h2>Nuestra ubicación</h2>
+          <h2>ENTREGA SIN CARGO en C.A.B.A. y Zona Norte</h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105082.96198496656!2d-58.462583227787306!3d-34.60814242088057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3911f8ab2d%3A0x27b394c2f3d87d2d!2sCaballito%2C%20Buenos%20Aires!5e0!3m2!1sen!2sar!4v1757460806295!5m2!1sen!2sar"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+      </div>
+    </div>
 
   <footer>
     <table class="footer table" border="2">

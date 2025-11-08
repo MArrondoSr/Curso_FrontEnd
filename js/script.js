@@ -47,3 +47,69 @@ function toggleMenu(force) {
   const mq = window.matchMedia('(min-width: 769px)');
   mq.addEventListener('change', () => { if (mq.matches) toggleMenu(false); });
 });
+
+//codigo de personalizacion
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form-custom");
+  const nombreInput = document.getElementById("nombre");
+  const colorSelect = document.getElementById("color");
+  const mensajeDiv = document.getElementById("mensaje");
+  const resetBtn = document.getElementById("reset");
+
+  resetBtn.style.display = "none";
+
+
+  // 🔹 Función para mostrar el saludo
+  function mostrarSaludo(nombre, color) {
+    document.body.style.backgroundColor = color;
+    form.style.display = "none"; // ocultar formulario
+    mensajeDiv.textContent = `Hola, ${nombre} 👋`;
+    mensajeDiv.style.display = "block";
+    resetBtn.style.display = "inline-block";
+
+  }
+
+  // 🔹 Al cargar la página, aplicar preferencias guardadas
+  const savedName = localStorage.getItem("nombre");
+  const savedColor = localStorage.getItem("color");
+
+  if (savedName && savedColor) {
+    mostrarSaludo(savedName, savedColor);
+  }
+
+  // 🔹 Escuchar envío del formulario
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // evita recargar la página
+
+    const nombre = nombreInput.value.trim();
+    const color = colorSelect.value;
+
+    if (!nombre || !color) {
+      alert("Por favor, completá tu nombre y elegí un color.");
+      return;
+    }
+
+    // Guardar en localStorage
+    localStorage.setItem("nombre", nombre);
+    localStorage.setItem("color", color);
+
+    // Mostrar saludo
+    mostrarSaludo(nombre, color);
+  });
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  localStorage.clear();
+  document.getElementById("form-custom").style.display = "block";
+  document.getElementById("mensaje").style.display = "none";
+  document.getElementById("reset").style.display = "none";
+  document.body.style.backgroundColor = "";
+});
+
+
+
+
+
+
