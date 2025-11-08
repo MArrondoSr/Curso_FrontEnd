@@ -17,16 +17,16 @@
   flex: 1;
   text-align: center;
   font-family: "EB Garamond", serif;
-  font-size: 40px;
-  font-weight: 300;
-  font-style: italic;
+  color: darkgreen;
+  font-weight: 600;
+  font-size: 2.5rem;
 }
 
 .header nav {
   margin-left: auto;
 }
 
-.lista_nav {
+#primary-nav .lista_nav {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -36,12 +36,50 @@
   padding: 0;
 }
 
-.lista_nav a {
+#primary-nav .lista_nav a {
   display: block;
   text-decoration: none;
   color: #222;
   padding: 4px 0;
 }
+
+#primary-nav .lista_nav a:hover { background: #f3f4f6; }
+
+#saludo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#mensaje {
+  font-size: 1.2em;
+}
+
+/* Botón hamburguesa (oculto en desktop) */
+.hamburger {
+  display: none;
+  width: 40px; height: 40px; padding: 8px;
+  border: 0; background: transparent; cursor: pointer;
+}
+.hamburger:focus { outline: 2px solid #111; outline-offset: 2px; }
+
+/* Icono tres rayas */
+.hamburger-lines,
+.hamburger-lines::before,
+.hamburger-lines::after {
+  display: block; width: 100%; height: 2px; background: #111; content: "";
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+.hamburger-lines { position: relative; }
+.hamburger-lines::before { position: absolute; top: -8px; }
+.hamburger-lines::after  { position: absolute; top:  8px; }
+
+/* Estado "abierto" (transforma a X) */
+.hamburger[aria-expanded="true"] .hamburger-lines { transform: rotate(45deg); }
+.hamburger[aria-expanded="true"] .hamburger-lines::before { transform: rotate(90deg); top: 0; }
+.hamburger[aria-expanded="true"] .hamburger-lines::after { opacity: 0; }
+
 
 @media (max-width: 768px) {
   .header {
@@ -49,22 +87,9 @@
     gap: 12px;
   }
 
-  .header img {
-    height: 96px;
-  }
 
-  .header h2 {
-    font-size: 32px;
-  }
+  #primary-nav .lista_nav a { padding: 12px 14px; }
 
-  .lista_nav {
-    gap: 6px;
-  }
-
-  .lista_nav a {
-    padding: 6px 0;
-    font-size: 0.95rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -74,40 +99,17 @@
     text-align: center;
     gap: 10px;
   }
+  
+  #primary-nav .lista_nav a { padding: 12px 14px; }
 
-  .header img {
-    height: 76px;
-  }
-
-  .header h2 {
-    font-size: 26px;
-    line-height: 1.2;
-    word-break: break-word;
-    hyphens: auto;
-  }
-
-  .header nav {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .lista_nav {
-    align-items: center;
-    gap: 4px;
-  }
-
-  .lista_nav a {
-    padding: 8px 0;
-    font-size: 1rem;
-  }
 }
 
 .inicio {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: clamp(280px, 26vw, 360px) 1fr; /* izquierda fija, derecha flexible */
+  align-items: start;
+  column-gap: 16px;
   margin: 10px;
-
 }
 
 .inicio video {
@@ -118,46 +120,16 @@
   object-fit: cover;
 }
 
-.map {
-  background-color: #f5f3b9;
-  height: 380px;
-  margin-top: 15px;
-  overflow: hidden;
-}
-
-.map>section {
+.inicio__texto {
   display: flex;
   flex-direction: column;
-  row-gap: 6px;
-}
-
-.map h2 {
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-  color: darkgreen;
-  line-height: 1.2;
-  padding-left: 5px;
-}
-
-.map iframe {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  height: auto;
-  border: 0;
-}
-
-.inicio__texto {
-  flex: 1 1 auto;
+  gap: 20px;             /* separa texto y productos */
   min-width: 0;
-  margin-right: 10px;
+  margin-right: 10px;    /* podés quitarlo si no lo necesitás */
 }
 
 .left {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex: 0 0 clamp(280px, 26vw, 360px);
+  display: block;
 }
 
 /* Responsive: apilar en pantallas chicas */
@@ -170,7 +142,9 @@
 
 @media (max-width: 700px) {
   .inicio {
+    display: flex;
     flex-direction: column;
+    gap:16px;
   }
 
   .left {
@@ -180,26 +154,16 @@
 
   .inicio video {
     width: 100%;
-    max-width: 420px;
-    margin-inline: auto;
-  }
-
-  .map {
-    width: 100%;
-  }
-
-  .map>section {
-    height: auto;
-  }
-
-  .map iframe {
-    width: 100%;
-    height: auto;
-    
+    max-width: 100%;
+    margin-inline: 0;
   }
 
   .inicio__texto {
     margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;               /* separa texto y productos */
+    min-width: 0;
   }
 }
 
@@ -344,10 +308,17 @@ body {
   gap: 12px;
   align-items: flex-start;
   background-color: #f5f3b9;
-  padding: 2px;
+  padding: 20px;
   justify-content: space-evenly;
-  margin-top: 35px;
-  margin-bottom: 1px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.productos__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start; 
 }
 
 .productos__heading {
@@ -360,6 +331,7 @@ body {
   padding: 8px 12px;
   margin: 0;
 }
+
 
 .articulo {
   display: grid;
@@ -421,6 +393,7 @@ body {
 }
 
 .articulo__btn {
+  text-decoration: none; 
   grid-area: btn;
   font-size: 1.1rem;
   line-height: 1.2;
@@ -527,6 +500,17 @@ body {
     justify-self: center;
     width: auto;
   }
+   .productos {
+    width: 100%;
+    display: grid;                   /* usa grid también en móvil para control */
+    grid-template-columns: 1fr;      /* intro arriba, artículo abajo */
+    gap: 16px;
+    padding: 8px 10px;
+  }
+
+  .productos__heading {
+    font-size: 1.8rem;        /* baja un poco el tamaño en móvil */
+  }
 }
 
 @media (max-width: 600px) {
@@ -537,6 +521,7 @@ body {
       "title"
       "desc"
       "btn";
+    max-width: 100%;
   }
 
   .articulo__img {
@@ -546,7 +531,8 @@ body {
   }
 
   .articulo__btn {
-    justify-self: center;
+    justify-self: start;
+    align-self: start;
   }
 }
 
@@ -637,6 +623,49 @@ body {
   }
 }
 
+
+  .map {
+    width: 100%;
+  }
+
+  .map>section {
+    height: auto;
+  }
+
+  .map iframe {
+    width:50%;
+    height: auto;
+    
+  }
+.map {
+  background-color: #f5f3b9;
+  height: 380px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.map>section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+}
+
+.map h2 {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  color: darkgreen;
+  line-height: 1.2;
+  padding-left: 5px;
+}
+
+.map iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  border: 0;
+}
+
 /*------------------ estilos del formulario ---------------------------------*/
 
 .body_form {
@@ -720,6 +749,19 @@ legend {
   cursor: pointer;
 }
 
+.btn_form_chico {
+  font-size: 0.8rem;
+  padding: 10px 16px;
+  height: 40px;
+  width: 180px;
+  border-radius: 10px;
+  border: 1px solid #d6a300;
+  background: rgb(109, 243, 149);
+  color: #1a1a1a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 /* --estilos de la tabla que está COMENTADA en el contacto.html -- */
 .table-wrap {
   max-width: 100%;
@@ -788,4 +830,210 @@ legend {
   margin: 0;
   flex: 1;
   line-height: 1.4;
+}
+
+/* Headers y footers con menues en color negro, despues buscar porque volvian al azul por defectod del navegador*/
+.header nav a,
+.header nav a:link,
+.header nav a:visited {
+  color: #111;
+  text-decoration: none;
+}
+.header nav a:hover {
+  background: #f3f4f6;
+}
+
+
+footer a,
+footer a:link,
+footer a:visited {
+  color: #111;
+  text-decoration: none;
+}
+footer a:hover { text-decoration: underline; }
+
+
+/* ===== Drawer lateral en móvil (forzar prioridad) ===== */
+@media (max-width: 768px) {
+
+  /* Estado base del nav: oculto a la derecha como panel fijo */
+  header.header#site-header nav {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: 100vh !important;
+    width: min(85vw, 320px) !important;
+    background: #fff !important;
+    box-shadow: -2px 0 12px rgba(0,0,0,.12) !important;
+    transform: translateX(100%) !important;   /* fuera de pantalla */
+    transition: transform 0.25s ease-out !important;
+    z-index: 10001 !important;               /* por encima del overlay */
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+  }
+
+  /* Contenido en columna */
+  header.header#site-header nav .lista_nav {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 16px !important;
+    margin: 0 !important;
+  }
+
+  /* Estado abierto: entra el panel */
+  header.header#site-header.open nav {
+    transform: translateX(0) !important;
+  }
+
+  /* Overlay clickeable (detrás del panel) */
+  #menu-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0,0,0,.35) !important;
+    z-index: 10000 !important;               /* debajo del nav */
+  }
+}
+
+/* ===== MÓVIL: reordenar header sin ocultar el h2 ===== */
+@media (max-width: 768px) {
+
+  .header {
+    position: relative;
+    display: flex;
+    flex-direction: column;       /* apila elementos verticalmente */
+    align-items: flex-start;
+    padding: 8px 16px 12px;
+  }
+
+  /* Logo más chico */
+  .header img.logo {
+    max-width: 200px;
+    height: auto;
+    margin: 0;
+  }
+
+  /* Subtítulo debajo del logo */
+  .header h2 {
+    font-size: 1.5rem;    
+    margin: 4px 0 0 0;    
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  /* Botón hamburguesa arriba a la derecha */
+  .header .hamburger {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 10002;               /* por encima del logo */
+  }
+}
+
+ .header.open .hamburger {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mensaje {
+    display: none; 
+    text-align: center; 
+    font-size: 1.2em; 
+    margin-top: 20px;"
+  }
+
+  
+/* ====== INDEX: dos columnas en desktop, apilado en móvil ====== */
+
+/* DESKTOP: 2 columnas iguales */
+section.productos.productos--index {
+  display: flex !important;         /* fuerza 2 columnas aunque otra regla diga grid/block */
+  align-items: stretch;
+  gap: 24px;
+  padding: 16px 0;
+}
+
+section.productos.productos--index > .productos__intro,
+section.productos.productos--index > .articulo {
+  flex: 1 1 0;                      /* mitad izquierda / mitad derecha */
+  min-width: 0;                     /* evita overflow en flex */
+}
+
+/* Columna izquierda: apila Título -> Texto -> Botón */
+section.productos.productos--index > .productos__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;          /* botón alineado a la izquierda */
+}
+
+section.productos.productos--index .productos__heading {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+section.productos.productos--index .productos__intro p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* Columna derecha: card estirada a la altura de la izquierda */
+section.productos.productos--index > .articulo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+section.productos.productos--index .articulo__img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  /* Si querés más consistencia visual:
+     aspect-ratio: 4 / 3;
+     object-fit: cover;
+  */
+}
+
+section.productos.productos--index .articulo__titulo { margin: 0; font-weight: 700; }
+section.productos.productos--index .articulo__desc   { margin: 0; }
+section.productos.productos--index .articulo__btn    { align-self: flex-start; }
+
+/* MÓVIL: apilar en orden Título → Texto → Card → Botón */
+@media (max-width: 680px) {
+  section.productos.productos--index {
+    display: block !important;      /* volvemos al flujo normal, apilado */
+  }
+
+  section.productos.productos--index > .productos__intro {
+    margin-bottom: 16px;
+  }
+
+  /* Aseguramos el orden visual dentro de la intro */
+  section.productos.productos--index .productos__heading { order: 0; }
+  section.productos.productos--index .productos__intro p { order: 1; }
+
+  /* La card va debajo del texto */
+  section.productos.productos--index > .articulo { margin-top: 16px; }
+
+  /* Botón del link “Ver más ofertas” al final */
+  section.productos.productos--index .productos__intro .articulo__btn {
+    order: 2;
+  }
 }

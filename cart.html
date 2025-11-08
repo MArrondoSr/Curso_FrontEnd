@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Passion+One:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2ab605f1d6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="cart_style.css">
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <h1>Tienda Online</h1>
+    <div id="productos">
+        <h2>Productos Disponibles</h2>
+        <ul>
+            <li>
+                Producto 1 - $ 10.-
+                <button class="agregar-carrito" data-id="1" data-nombre="Producto 1" data-precio="10">
+                    Agregar al Carrito
+                </button>
+            </li>
+            <li>
+                Producto 2 - $ 15.-
+                <button class="agregar-carrito" data-id="2" data-nombre="Producto 2" data-precio="15">
+                    Agregar al Carrito
+                </button>
+            </li>
+            <li>
+                Producto 3 - $ 20.-
+                <button class="agregar-carrito" data-id="3" data-nombre="Producto 3" data-precio="20">
+                    Agregar al Carrito
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div id="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="lista-carrito"></ul>
+        <button id="vaciar-carrito">Vaciar Carrito</button>
+    </div>
+
+    <script src="../js/cart_script.js"></script>
+</body>
+</html>
