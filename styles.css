@@ -303,16 +303,17 @@ body {
 }
 
 .productos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: flex-start;
+  display: grid;                                 
+  grid-template-columns: repeat(2, minmax(320px, 1fr)); 
+  gap: 16px;                                      
+  align-items: start;                             
+  justify-items: stretch;                         
   background-color: #f5f3b9;
   padding: 20px;
-  justify-content: space-evenly;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 35px;
+  margin-bottom: 1px;
 }
+
 
 .productos__intro {
   display: flex;
@@ -332,25 +333,6 @@ body {
   margin: 0;
 }
 
-
-.articulo {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "img desc"
-    "title btn";
-  column-gap: 12px;
-  row-gap: 8px;
-  justify-items: start;
-  align-items: start;
-  background: #fff;
-  color: #000;
-  padding: 12px;
-  box-sizing: border-box;
-  max-width: 520px;
-  flex: 0 1 480px;
-}
 
 .articulo__img {
   grid-area: img;
@@ -392,6 +374,12 @@ body {
   align-self: start;
 }
 
+.articulo__precio { 
+  grid-area: price; 
+  font-weight: 700; 
+  color: #1a6e1a;   /* a gusto */
+}
+
 .articulo__btn {
   text-decoration: none; 
   grid-area: btn;
@@ -413,104 +401,6 @@ body {
 
 .articulo__btn i {
   font-size: 1.05em;
-}
-
-.articulo_final {
-  display: grid;
-  grid-template-columns: var(--img-w, 300px) 1fr;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "img title"
-    "img desc"
-    "img btn";
-  gap: 12px 12px;
-  margin: 0px 45px 3px 45px;
-  background: #fff;
-  color: #000;
-  padding: 12px;
-  box-sizing: border-box;
-  flex: 1 1 100%;
-  width: 100%;
-  max-width: none;
-  align-items: start;
-  --img-w: 300px;
-}
-
-.articulo_final>img {
-  grid-area: img;
-  width: var(--img-w, 320px);
-  height: auto;
-  display: block;
-  justify-self: start;
-}
-
-.articulo_final .articulo__titulo {
-  grid-area: title;
-  align-self: start;
-  margin: 0;
-  font-size: 40px;
-  color: darkgreen;
-}
-
-.articulo_final .articulo__desc {
-  margin: 0;
-  grid-area: desc;
-  max-width: none;
-}
-
-.articulo_final .articulo__btn {
-  grid-area: btn;
-  justify-self: end;
-  align-self: end;
-}
-
-/* ====== MOBILE: card “articulo_final” apilada ====== */
-@media (max-width: 700px) {
-  .articulo_final {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas:
-      "img"
-      "title"
-      "desc"
-      "btn";
-    gap: 10px;
-    margin: 8px 10px;
-    align-items: start;
-  }
-
-  .articulo_final>img {
-    width: 100%;
-    max-width: 360px;
-    justify-self: center;
-  }
-
-  .articulo_final .articulo__titulo {
-    margin: 0;
-    font-size: clamp(20px, 5.2vw, 28px);
-    text-align: center;
-  }
-
-  .articulo_final .articulo__desc {
-    max-width: none;
-    text-align: left;
-  }
-
-  .articulo_final .articulo__btn {
-    justify-self: center;
-    width: auto;
-  }
-   .productos {
-    width: 100%;
-    display: grid;                   /* usa grid también en móvil para control */
-    grid-template-columns: 1fr;      /* intro arriba, artículo abajo */
-    gap: 16px;
-    padding: 8px 10px;
-  }
-
-  .productos__heading {
-    font-size: 1.8rem;        /* baja un poco el tamaño en móvil */
-  }
 }
 
 @media (max-width: 600px) {
@@ -624,19 +514,6 @@ body {
 }
 
 
-  .map {
-    width: 100%;
-  }
-
-  .map>section {
-    height: auto;
-  }
-
-  .map iframe {
-    width:50%;
-    height: auto;
-    
-  }
 .map {
   background-color: #f5f3b9;
   height: 380px;
@@ -949,7 +826,7 @@ footer a:hover { text-decoration: underline; }
     display: none; 
     text-align: center; 
     font-size: 1.2em; 
-    margin-top: 20px;"
+    margin-top: 20px;
   }
 
   
@@ -1015,6 +892,17 @@ section.productos.productos--index .articulo__titulo { margin: 0; font-weight: 7
 section.productos.productos--index .articulo__desc   { margin: 0; }
 section.productos.productos--index .articulo__btn    { align-self: flex-start; }
 
+/* Distribución de productos en prod_serv.html (2 columnas) */
+section.productos.productos--grid {
+  display: grid !important;                          /* gana al flex del index */
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+  justify-items: stretch;
+
+}
+
+
 /* MÓVIL: apilar en orden Título → Texto → Card → Botón */
 @media (max-width: 680px) {
   section.productos.productos--index {
@@ -1035,5 +923,165 @@ section.productos.productos--index .articulo__btn    { align-self: flex-start; }
   /* Botón del link “Ver más ofertas” al final */
   section.productos.productos--index .productos__intro .articulo__btn {
     order: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  section.productos.productos--grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+section.productos.productos--grid .articulo__precio {
+  font-size: 1.9rem;
+  font-weight: 900;
+  margin: 0 0 8px 0;
+}
+
+section.productos.productos--grid .articulo__btn {
+  margin-top: auto;      /* empuja el botón al fondo */
+  align-self: flex-start;
+}
+
+/* CARD: imagen a la izquierda con recorte; alto fijo uniforme */
+section.productos.productos--grid > .articulo {
+  display: grid;
+  grid-template-columns: 220px 1fr;      /* columna img fija + columna contenido fluida */
+  grid-template-rows: auto 1fr auto;     /* fila título | fila desc | fila acciones */
+  grid-template-areas:
+    "img title"
+    "img desc"
+    "img actions";
+  column-gap: 16px;
+  height: 260px;                         /* <<< alto fijo para TODAS las cards */
+  width: 100%;
+  max-width: none;
+  background: #fff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 16px;
+  overflow: hidden;                      /* por si algo se quiere salir */
+}
+
+/* la imagen ocupa toda su columna y se recorta si hace falta */
+section.productos.productos--grid .articulo__img {
+  grid-area: img;
+  width: 100%;
+  height: 100%;          /* llena el alto de la card */
+  object-fit: cover;     /* recorta para llenar sin deformar */
+  display: block;
+  border-radius: 10px;
+}
+
+section.productos.productos--grid .articulo__titulo {
+  grid-area: title;
+  margin: 0 0 4px 0;
+  align-self: start;
+  font-weight: 700;
+}
+
+section.productos.productos--grid .articulo__desc {
+  grid-area: desc;
+  margin: 0 0 20px 0;  
+  max-width: none;
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;     /* ← muestra 6 líneas en lugar de 4 */
+  -webkit-box-orient: vertical;
+  line-height: 1.5;
+}
+
+section.productos.productos--grid .articulo__precio {
+  grid-column: 2;                   /* última fila, columna de contenido */
+  grid-row: 3;
+  align-self: end;
+  justify-self: start;
+  margin: 0;
+}
+
+section.productos.productos--grid .articulo__btn {
+  grid-column: 2;                   /* misma fila, alineado al borde derecho */
+  grid-row: 3;
+  align-self: end;
+  justify-self: end;
+}
+
+/* ===== Responsive móviles (<= 700px) ===== */
+@media (max-width: 700px) {
+  /* 1) La card pasa a layout apilado y altura automática */
+  section.productos.productos--grid > .articulo {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto; 
+    grid-template-areas:
+      "img"
+      "title"
+      "desc"
+      "actions";
+    height: auto;                 
+    padding: 12px;
+  }
+
+  /* 2) Imagen grande arriba, recortada, con alto razonable */
+  section.productos.productos--grid .articulo__img {
+    grid-area: img;
+    width: 100%;
+    height: clamp(180px, 48vw, 260px);  /* crece un poco en mobile */
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 0 10px 0;
+  }
+
+  /* 3) Título y descripción sin recorte duro */
+  section.productos.productos--grid .articulo__titulo {
+    grid-area: title;
+    margin: 0 0 6px 0;
+    font-size: clamp(1rem, 5.5vw, 3rem);
+    line-height: 1.25;
+  }
+
+  section.productos.productos--grid .articulo__desc {
+  grid-area: desc;
+  margin: 0 0 20px 0;        /* ← agrega ~1 cm de espacio abajo */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;     /* ← muestra 6 líneas en lugar de 4 */
+  -webkit-box-orient: vertical;
+  line-height: 1.5;
+}
+
+
+  /* 4) “Fila de acciones”: precio visible y botón alineado */
+  /* Creamos la fila ‘actions’ colocando precio y botón en la misma fila */
+  section.productos.productos--grid .articulo__precio {
+    grid-area: actions;
+    justify-self: start;
+    align-self: center;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 0;
+    display: inline-block;
+    /* font-size: clamp(1rem, 3.5vw, 1.05rem); */
+  }
+
+  section.productos.productos--grid .articulo__btn {
+    grid-area: actions;
+    justify-self: end;
+    align-self: center;
+    margin: 0;
+    padding: 8px 12px;
+    font-size: .95rem;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 700px) {
+  section.productos.productos--grid > .articulo .articulo__precio {
+    font-size: 1.35rem;   /* probá 1.4–1.5 si querés más grande */
+    font-weight: 800;
+    color: #165a19;
+    line-height: 1.2;
   }
 }

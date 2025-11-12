@@ -23,29 +23,41 @@
 }
 
 .articulo {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "img desc"
-    "title btn";
-  column-gap: 12px;
-  row-gap: 8px;
-  justify-items: start;
-  align-items: start;
-  background: #fff;
-  color: #000;
-  padding: 12px;
-  box-sizing: border-box;
-  max-width: 520px;
-  flex: 0 1 480px;
+  max-width: 480px;
+  flex: 0 1 460px;         /* ligeramente más angosto */
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .articulo__img {
   grid-area: img;
   display: block;
-  width: var(--img-w, 220px);
-  height: auto;
+  width: 100%;             /* ocupa el ancho disponible */
+  max-width: 220px;        /* evita que crezca demasiado */
+  height: 180px;           /* alto fijo visualmente consistente */
+  object-fit: cover;       /* recorta manteniendo proporción */
+  border-radius: 8px;      /* opcional: esquinas suaves */
   margin: 0;
   justify-self: start;
 }
+
+/* Versión responsive (opcional) */
+@media (max-width: 700px) {
+  .articulo {
+    grid-template-columns: 1fr; /* apila imagen y texto */
+    grid-template-areas:
+      "img"
+      "desc"
+      "title"
+      "btn";
+    text-align: center;
+  }
+
+  .articulo__img {
+    justify-self: center;
+    width: 100%;
+    max-width: 320px;
+    height: auto;  /* en móvil, deja que la imagen ajuste altura */
+  }
+}
+
