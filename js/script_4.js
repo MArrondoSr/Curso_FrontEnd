@@ -1,10 +1,4 @@
-// =========================
-// CARRITO DE COMPRAS DINÁMICO
-// =========================
-
-document.addEventListener('DOMContentLoaded', () => {
-  // === 1) Array de productos ===
-  let productos = [
+const productosLocales = [
     {
       id: "001",
       name: "Recetarios / Blocks",
@@ -54,6 +48,69 @@ document.addEventListener('DOMContentLoaded', () => {
       image: "../imagenes/volantes.jpg",
     },
   ];
+  
+
+// =====================================================
+// 2) Función para obtener productos (API + fallback local)
+// =====================================================
+// =====================================================
+// 2) Función para obtener productos (API + opción local) 
+// =====================================================
+async function obtenerProductos() {
+  // Preguntar al usuario qué quiere ver
+  const usarRemoto = window.confirm(
+    "¿Querés ver los productos del sitio remoto (fakestoreapi.com)?\n\n" +
+    "Aceptar = productos remotos\nCancelar = productos locales"
+  );
+
+  // Si elige NO (Cancelar) → usamos tu base local
+  if (!usarRemoto) {
+    console.log("Usando catálogo LOCAL de imprenta.");
+    return productosLocales;
+  }
+
+  // Si elige SÍ → intentamos usar la API remota
+  const url = "https://fakestoreapi.com/products";
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Error al obtener productos de la API: " + response.status);
+    }
+
+    const productosAPI = await response.json();
+
+    console.log("Productos obtenidos desde fakestore:", productosAPI);
+
+    // Adaptamos el formato de fakestore a tu estructura
+    const adaptados = productosAPI.map(p => ({
+      id: String(p.id).padStart(3, "0"),
+      name: p.title,
+      description: p.description,
+      amount: Math.round(p.price * 1000),  // o p.price a secas, como prefieras
+      image: p.image
+    }));
+
+    return adaptados;
+
+  } catch (error) {
+    console.warn("⚠️ Error en la API, vuelvo al catálogo local:", error.message);
+    return productosLocales;
+  }
+}
+
+
+  // =========================
+// CARRITO DE COMPRAS DINÁMICO
+// =========================
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // === 1) Array de productos ===
+
+  const productos = await obtenerProductos();
+
+  
 
   // === 2) Render dinámico de cards ===
   const contenedorProductos = document.querySelector(".productos");
