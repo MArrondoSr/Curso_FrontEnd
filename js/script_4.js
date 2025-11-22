@@ -51,9 +51,6 @@ const productosLocales = [
   
 
 // =====================================================
-// 2) Función para obtener productos (API + fallback local)
-// =====================================================
-// =====================================================
 // 2) Función para obtener productos (API + opción local) 
 // =====================================================
 async function obtenerProductos() {
@@ -83,12 +80,12 @@ async function obtenerProductos() {
 
     console.log("Productos obtenidos desde fakestore:", productosAPI);
 
-    // Adaptamos el formato de fakestore a tu estructura
+    // Adapto el formato de fakestore a la estructura que tenía
     const adaptados = productosAPI.map(p => ({
       id: String(p.id).padStart(3, "0"),
       name: p.title,
       description: p.description,
-      amount: Math.round(p.price * 1000),  // o p.price a secas, como prefieras
+      amount: Math.round(p.price * 1000),  
       image: p.image
     }));
 
@@ -144,14 +141,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       price.className = 'articulo__precio';
       price.textContent = '$ ' + (p.amount);
 
+      //  👈 nuevo AGREGADOS PARA HACER CARRITO INDEPENDIENTE
+      const estado = document.createElement('p');
+      estado.className = 'articulo__estado';
+      estado.textContent = ''; // comienza vacío
+
+
       article.appendChild(img);
       article.appendChild(desc);
       article.appendChild(h3);
       article.appendChild(price);
+      article.appendChild(estado);   // 👈 nuevo
       article.appendChild(btn);
 
       contenedorProductos.appendChild(article);
-      // document.querySelector('.productos').appendChild(article);
+      
     });
   }
 
@@ -160,14 +164,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btn = e.target.closest(".agregar-carrito");
     if (!btn) return;
 
-    const producto = {
-      id: btn.dataset.id,
-      nombre: btn.dataset.nombre,
-      precio: Number(btn.dataset.precio),
-    };
+      const producto = {
+          id: btn.dataset.id,
+          nombre: btn.dataset.nombre,
+          precio: Number(btn.dataset.precio),
+      };
 
-    agregarProducto(producto);
-    cargarCarrito();
+      agregarProducto(producto);
+      cargarCarrito();
+
+      // 🔹 NUEVO AGREGADO PARA CARRITO INDEPENDIENTE
+  // 🔹 Leer del carrito cuántos hay de este producto
+  const carrito = getCarrito();
+  const item = carrito.find(p => p.id === producto.id);
+  const qty = item ? (item.cantidad || 1) : 1;
+
+  // 🔹 Actualizar el texto del botón con esa cantidad
+  btn.innerHTML = `
+    ${qty} en el carrito, ¿agregar otro?
+    <i class="fa-solid fa-cart-shopping"></i>
+  `;
+  btn.classList.add("articulo__btn--added");
   });
 
   // === 4) Botón Vaciar Carrito ===
@@ -175,6 +192,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   btnVaciar?.addEventListener("click", () => {
     localStorage.removeItem("carrito");
     cargarCarrito();
+
+  // 🔹 Resetear todos los botones "Agregar al carrito"
+  const botones = document.querySelectorAll(".agregar-carrito");
+  botones.forEach(boton => {
+    boton.innerHTML = `Agregar al carrito <i class="fa-solid fa-cart-shopping"></i>`;
+    boton.classList.remove("articulo__btn--added");
+    // si en algún momento volvemos a usar disabled:
+    // boton.disabled = false;
+  });
+
+      const btnIrCarrito = document.getElementById("btn-ir-al-carrito");
+
+      btnIrCarrito?.addEventListener("click", () => {
+          // cambiá 'carrito.html' por el nombre de tu página de carrito
+          window.location.href = "carrito_compra.html";
+      });
+
   });
 
   // === 5) Cargar carrito al inicio ===
@@ -219,4 +253,90 @@ function cargarCarrito() {
     li.textContent = `${p.nombre} x${qty} - $ ${p.precio * qty}`;
     lista.appendChild(li);
   });
+}
+
+// =========================
+// PÁGINA CARRITO_COMPRAS
+// =========================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedorCarritoPage = document.getElementById("carrito-items");
+  if (!contenedorCarritoPage) {
+    // No estoy en carrito_compras.html, no hago nada extra
+    return;
+  }
+
+  // Estamos en carrito_compras.html → inicializar la vista
+  renderCarritoPage();
+
+  const btnSeguir = document.getElementById("btn-seguir-comprando");
+  btnSeguir?.addEventListener("click", () => {
+    // Volver a la página de productos
+    window.location.href = "prod_serv.html";   // ajustá el nombre si es otro
+  });
+
+  const btnVaciarPage = document.getElementById("btn-vaciar-carrito-page");
+  btnVaciarPage?.addEventListener("click", () => {
+    localStorage.removeItem("carrito");
+    renderCarritoPage();   // refrescar la vista de carrito
+  });
+
+  const btnPagar = document.getElementById("btn-ir-a-pagar");
+  btnPagar?.addEventListener("click", () => {
+    alert("Aquí iría el proceso de pago (futuro).");
+  });
+});
+
+// Función que dibuja las cards + total en carrito_compras.html
+function renderCarritoPage() {
+  const contenedor = document.getElementById("carrito-items");
+  const resumen = document.getElementById("carrito-resumen");
+  if (!contenedor || !resumen) return;
+
+  contenedor.innerHTML = "";
+  resumen.innerHTML = "";
+
+  const carrito = getCarrito();
+
+  if (!carrito.length) {
+    contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
+    resumen.innerHTML = "";
+    return;
+  }
+
+  let total = 0;
+
+  carrito.forEach((p) => {
+    const qty = p.cantidad || 1;
+    const subtotal = p.precio * qty;
+    total += subtotal;
+
+    const card = document.createElement("article");
+    card.className = "carrito-card";
+
+    const title = document.createElement("h3");
+    title.textContent = p.nombre;
+
+    const lineaCantidad = document.createElement("p");
+    lineaCantidad.textContent = `Cantidad: ${qty}`;
+
+    const lineaPrecio = document.createElement("p");
+    lineaPrecio.textContent = `Precio unitario: $ ${p.precio}`;
+
+    const lineaSubtotal = document.createElement("p");
+    lineaSubtotal.textContent = `Subtotal: $ ${subtotal}`;
+
+    card.appendChild(title);
+    card.appendChild(lineaCantidad);
+    card.appendChild(lineaPrecio);
+    card.appendChild(lineaSubtotal);
+
+    contenedor.appendChild(card);
+  });
+
+  const totalP = document.createElement("p");
+  totalP.className = "carrito-total";
+  totalP.textContent = `Total de la compra: $ ${total}`;
+
+  resumen.appendChild(totalP);
 }
