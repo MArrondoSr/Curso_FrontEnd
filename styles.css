@@ -80,18 +80,6 @@
 .hamburger[aria-expanded="true"] .hamburger-lines::before { transform: rotate(90deg); top: 0; }
 .hamburger[aria-expanded="true"] .hamburger-lines::after { opacity: 0; }
 
-
-@media (max-width: 768px) {
-  .header {
-    padding: 10px 14px;
-    gap: 12px;
-  }
-
-
-  #primary-nav .lista_nav a { padding: 12px 14px; }
-
-}
-
 @media (max-width: 480px) {
   .header {
     flex-direction: column;
@@ -783,7 +771,10 @@ footer a:hover { text-decoration: underline; }
     flex-direction: column;       /* apila elementos verticalmente */
     align-items: flex-start;
     padding: 8px 16px 12px;
+    gap: 12px;
   }
+
+  #primary-nav .lista_nav a { padding: 12px 14px; }
 
   /* Logo más chico */
   .header img.logo {
@@ -1083,5 +1074,105 @@ section.productos.productos--grid .articulo__btn {
     font-weight: 800;
     color: #165a19;
     line-height: 1.2;
+  }
+}
+
+.carrito-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.carrito-items {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.carrito-card {
+  display: flex;
+  gap: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.carrito-card__img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.carrito-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.carrito-card__titulo {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: darkgreen;
+}
+
+.carrito-card__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.carrito-card__estado {
+  margin: 4px 0 0;
+  font-weight: 600;
+  color: #1a6e1a;
+}
+
+.carrito-card__precio,
+.carrito-card__subtotal {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.carrito-total {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1a6e1a;
+  margin-top: 8px;
+}
+
+
+/* Barra de botones debajo del contenido (en ambas páginas) */
+.carrito-bar,
+.carrito-acciones {
+  display: flex;
+  justify-content: space-between;  /* reparte: izquierda / centro / derecha */
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 16px;
+  flex-wrap: wrap;                 /* por si en móvil no entra todo en una línea */
+}
+
+/* Que los botones no se estiren raros */
+.carrito-bar .articulo__btn,
+.carrito-acciones .articulo__btn {
+  flex: 0 0 auto;   /* tamaño según contenido */
+}
+
+@media (max-width: 600px) {
+  .carrito-bar,
+  .carrito-acciones {
+    flex-direction: column;
+    align-items: stretch;    /* que ocupen todo el ancho */
+  }
+
+  .carrito-bar .articulo__btn,
+  .carrito-acciones .articulo__btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 }
