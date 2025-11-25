@@ -59,7 +59,7 @@ const productosLocales = [
 async function obtenerProductos() {
   const usarRemoto = window.confirm(
     "¿Querés ver los productos del sitio remoto (fakestoreapi.com)?\n\n" +
-    "Aceptar = productos remotos\nCancelar = productos locales"
+    "Ok = productos remotos\nCancel = productos locales"
   );
 
   if (!usarRemoto) {
