@@ -58,12 +58,22 @@ function renderCarritoPage() {
     lineaSubtotal.className = "carrito-card__subtotal";
     lineaSubtotal.textContent = `Subtotal: $ ${subtotal}`;
 
+    const controles = document.createElement("div");
+    controles.className = "carrito-card__controles";
+
+    controles.innerHTML = `
+      <button class="carrito-btn carrito-btn--menos" data-id="${p.id}">−</button>
+      <span class="carrito-card__cantidad">${qty}</span>
+      <button class="carrito-btn carrito-btn--mas" data-id="${p.id}">+</button>
+      <button class="carrito-btn carrito-btn--quitar" data-id="${p.id}">Quitar</button>
+    `;
 
     info.appendChild(title);
     info.appendChild(desc);
     info.appendChild(estado);
     info.appendChild(lineaPrecio);
     info.appendChild(lineaSubtotal);
+    info.appendChild(controles);
 
     card.appendChild(img);
     card.appendChild(info);
@@ -85,6 +95,44 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mostrar carrito al entrar
   renderCarritoPage();
 
+  contenedorCarritoPage.addEventListener("click", (e) => {
+    const btnMas = e.target.closest(".carrito-btn--mas");
+    const btnMenos = e.target.closest(".carrito-btn--menos");
+    const btnQuitar = e.target.closest(".carrito-btn--quitar");
+
+    if (!btnMas && !btnMenos && !btnQuitar) return;
+
+    const btn = btnMas || btnMenos || btnQuitar;
+    const id = btn.dataset.id;
+    if (!id) return;
+
+    let carrito = getCarrito();
+    const item = carrito.find(p => String(p.id) === String(id));
+    if (!item) return;
+
+    // ➕ sumar unidad
+    if (btnMas) {
+      item.cantidad = (item.cantidad || 1) + 1;
+    }
+
+    // ➖ restar unidad
+    if (btnMenos) {
+      item.cantidad = (item.cantidad || 1) - 1;
+      // si baja a 0 o menos, lo sacamos del carrito
+      if (item.cantidad <= 0) {
+        carrito = carrito.filter(p => String(p.id) !== String(id));
+      }
+    }
+
+    // 🗑 quitar directamente
+    if (btnQuitar) {
+      carrito = carrito.filter(p => String(p.id) !== String(id));
+    }
+
+    setCarrito(carrito);       // guardamos cambios en localStorage
+    renderCarritoPage();       // refrescamos la vista del carrito
+  });
+
   const btnSeguir = document.getElementById("btn-seguir-comprando");
   btnSeguir?.addEventListener("click", () => {
     window.location.href = "prod_serv.html";   // o el nombre real de tu page de productos
@@ -100,4 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnPagar?.addEventListener("click", () => {
     alert("Aquí iría el proceso de pago (futuro).");
   });
+
 });
+
+  

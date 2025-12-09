@@ -74,6 +74,8 @@
 .hamburger-lines { position: relative; }
 .hamburger-lines::before { position: absolute; top: -8px; }
 .hamburger-lines::after  { position: absolute; top:  8px; }
+
+/* Estado "abierto" (transforma a X) */
 .hamburger[aria-expanded="true"] .hamburger-lines { transform: rotate(45deg); }
 .hamburger[aria-expanded="true"] .hamburger-lines::before { transform: rotate(90deg); top: 0; }
 .hamburger[aria-expanded="true"] .hamburger-lines::after { opacity: 0; }
@@ -92,7 +94,7 @@
 
 .inicio {
   display: grid;
-  grid-template-columns: clamp(280px, 26vw, 360px) 1fr; 
+  grid-template-columns: clamp(280px, 26vw, 360px) 1fr; /* izquierda fija, derecha flexible */
   align-items: start;
   column-gap: 16px;
   margin: 10px;
@@ -109,9 +111,9 @@
 .inicio__texto {
   display: flex;
   flex-direction: column;
-  gap: 20px;             
+  gap: 20px;             /* separa texto y productos */
   min-width: 0;
-  margin-right: 10px;    
+  margin-right: 10px;    /* podés quitarlo si no lo necesitás */
 }
 
 .left {
@@ -148,7 +150,7 @@
     margin-right: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;               
+    gap: 20px;               /* separa texto y productos */
     min-width: 0;
   }
 }
@@ -363,7 +365,7 @@ body {
 .articulo__precio { 
   grid-area: price; 
   font-weight: 700; 
-  color: #1a6e1a;  
+  color: #1a6e1a;   /* a gusto */
 }
 
 .articulo__btn {
@@ -716,8 +718,11 @@ footer a:visited {
 }
 footer a:hover { text-decoration: underline; }
 
+
+/* ===== Drawer lateral en móvil (forzar prioridad) ===== */
 @media (max-width: 768px) {
 
+  /* Estado base del nav: oculto a la derecha como panel fijo */
   header.header#site-header nav {
     position: fixed !important;
     top: 0 !important;
@@ -726,15 +731,16 @@ footer a:hover { text-decoration: underline; }
     width: min(85vw, 320px) !important;
     background: #fff !important;
     box-shadow: -2px 0 12px rgba(0,0,0,.12) !important;
-    transform: translateX(100%) !important;   
+    transform: translateX(100%) !important;   /* fuera de pantalla */
     transition: transform 0.25s ease-out !important;
-    z-index: 10001 !important;              
+    z-index: 10001 !important;               /* por encima del overlay */
     display: block !important;
     visibility: visible !important;
     pointer-events: auto !important;
     opacity: 1 !important;
   }
 
+  /* Contenido en columna */
   header.header#site-header nav .lista_nav {
     display: flex !important;
     flex-direction: column !important;
@@ -743,24 +749,27 @@ footer a:hover { text-decoration: underline; }
     margin: 0 !important;
   }
 
+  /* Estado abierto: entra el panel */
   header.header#site-header.open nav {
     transform: translateX(0) !important;
   }
 
+  /* Overlay clickeable (detrás del panel) */
   #menu-overlay {
     position: fixed !important;
     inset: 0 !important;
     background: rgba(0,0,0,.35) !important;
-    z-index: 10000 !important;               
+    z-index: 10000 !important;               /* debajo del nav */
   }
 }
 
+/* ===== MÓVIL: reordenar header sin ocultar el h2 ===== */
 @media (max-width: 768px) {
 
   .header {
     position: relative;
     display: flex;
-    flex-direction: column;       
+    flex-direction: column;       /* apila elementos verticalmente */
     align-items: flex-start;
     padding: 8px 16px 12px;
     gap: 12px;
@@ -775,6 +784,7 @@ footer a:hover { text-decoration: underline; }
     margin: 0;
   }
 
+  /* Subtítulo debajo del logo */
   .header h2 {
     font-size: 1.5rem;    
     margin: 4px 0 0 0;    
@@ -782,6 +792,7 @@ footer a:hover { text-decoration: underline; }
     line-height: 1.2;
   }
 
+  /* Botón hamburguesa arriba a la derecha */
   .header .hamburger {
     position: absolute;
     top: 12px;
@@ -794,7 +805,7 @@ footer a:hover { text-decoration: underline; }
     border: none;
     background: transparent;
     cursor: pointer;
-    z-index: 10002;             
+    z-index: 10002;               /* por encima del logo */
   }
 }
 
@@ -813,8 +824,9 @@ footer a:hover { text-decoration: underline; }
   
 /* ====== INDEX: dos columnas en desktop, apilado en móvil ====== */
 
+/* DESKTOP: 2 columnas iguales */
 section.productos.productos--index {
-  display: flex !important;         
+  display: flex !important;         /* fuerza 2 columnas aunque otra regla diga grid/block */
   align-items: stretch;
   gap: 24px;
   padding: 16px 0;
@@ -822,15 +834,16 @@ section.productos.productos--index {
 
 section.productos.productos--index > .productos__intro,
 section.productos.productos--index > .articulo {
-  flex: 1 1 0;                     
-  min-width: 0;                     
+  flex: 1 1 0;                      /* mitad izquierda / mitad derecha */
+  min-width: 0;                     /* evita overflow en flex */
 }
 
+/* Columna izquierda: apila Título -> Texto -> Botón */
 section.productos.productos--index > .productos__intro {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  align-items: flex-start;         
+  align-items: flex-start;          /* botón alineado a la izquierda */
 }
 
 section.productos.productos--index .productos__heading {
@@ -844,6 +857,7 @@ section.productos.productos--index .productos__intro p {
   line-height: 1.55;
 }
 
+/* Columna derecha: card estirada a la altura de la izquierda */
 section.productos.productos--index > .articulo {
   display: flex;
   flex-direction: column;
@@ -860,15 +874,19 @@ section.productos.productos--index .articulo__img {
   object-fit: cover;
   display: block;
   border-radius: 8px;
-
+  /* Si querés más consistencia visual:
+     aspect-ratio: 4 / 3;
+     object-fit: cover;
+  */
 }
 
 section.productos.productos--index .articulo__titulo { margin: 0; font-weight: 700; }
 section.productos.productos--index .articulo__desc   { margin: 0; }
 section.productos.productos--index .articulo__btn    { align-self: flex-start; }
 
+/* Distribución de productos en prod_serv.html (2 columnas) */
 section.productos.productos--grid {
-  display: grid !important;                         
+  display: grid !important;                          /* gana al flex del index */
   grid-template-columns: repeat(2, minmax(300px, 1fr));
   gap: 16px;
   align-items: stretch;
@@ -877,20 +895,24 @@ section.productos.productos--grid {
 }
 
 
+/* MÓVIL: apilar en orden Título → Texto → Card → Botón */
 @media (max-width: 680px) {
   section.productos.productos--index {
-    display: block !important;      
+    display: block !important;      /* volvemos al flujo normal, apilado */
   }
 
   section.productos.productos--index > .productos__intro {
     margin-bottom: 16px;
   }
 
+  /* Aseguramos el orden visual dentro de la intro */
   section.productos.productos--index .productos__heading { order: 0; }
   section.productos.productos--index .productos__intro p { order: 1; }
 
+  /* La card va debajo del texto */
   section.productos.productos--index > .articulo { margin-top: 16px; }
 
+  /* Botón del link “Ver más ofertas” al final */
   section.productos.productos--index .productos__intro .articulo__btn {
     order: 2;
   }
@@ -902,6 +924,7 @@ section.productos.productos--grid {
   }
 }
 
+
 section.productos.productos--grid .articulo__precio {
   font-size: 1.9rem;
   font-weight: 900;
@@ -909,20 +932,21 @@ section.productos.productos--grid .articulo__precio {
 }
 
 section.productos.productos--grid .articulo__btn {
-  margin-top: auto;      
+  margin-top: auto;      /* empuja el botón al fondo */
   align-self: flex-start;
 }
 
+/* CARD: imagen a la izquierda con recorte; alto fijo uniforme */
 section.productos.productos--grid > .articulo {
   display: grid;
-  grid-template-columns: 220px 1fr;      
-  grid-template-rows: auto 1fr auto;     
+  grid-template-columns: 220px 1fr;      /* columna img fija + columna contenido fluida */
+  grid-template-rows: auto 1fr auto;     /* fila título | fila desc | fila acciones */
   grid-template-areas:
     "img title"
     "img desc"
     "img actions";
   column-gap: 16px;
-  height: 260px;                         
+  height: 260px;                         /* <<< alto fijo para TODAS las cards */
   width: 100%;
   max-width: none;
   background: #fff;
@@ -930,14 +954,15 @@ section.productos.productos--grid > .articulo {
   box-sizing: border-box;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   padding: 16px;
-  overflow: hidden;                      
+  overflow: hidden;                      /* por si algo se quiere salir */
 }
 
+/* la imagen ocupa toda su columna y se recorta si hace falta */
 section.productos.productos--grid .articulo__img {
   grid-area: img;
   width: 100%;
-  height: 100%;          
-  object-fit: cover;     
+  height: 100%;          /* llena el alto de la card */
+  object-fit: cover;     /* recorta para llenar sin deformar */
   display: block;
   border-radius: 10px;
 }
@@ -956,13 +981,13 @@ section.productos.productos--grid .articulo__desc {
   width: 100%;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 6;   
+  -webkit-line-clamp: 6;     /* ← muestra 6 líneas en lugar de 4 */
   -webkit-box-orient: vertical;
   line-height: 1.5;
 }
 
 section.productos.productos--grid .articulo__precio {
-  grid-column: 2;                  
+  grid-column: 2;                   /* última fila, columna de contenido */
   grid-row: 3;
   align-self: end;
   justify-self: start;
@@ -970,7 +995,7 @@ section.productos.productos--grid .articulo__precio {
 }
 
 section.productos.productos--grid .articulo__btn {
-  grid-column: 2;                   
+  grid-column: 2;                   /* misma fila, alineado al borde derecho */
   grid-row: 3;
   align-self: end;
   justify-self: end;
@@ -978,6 +1003,7 @@ section.productos.productos--grid .articulo__btn {
 
 /* ===== Responsive móviles (<= 700px) ===== */
 @media (max-width: 700px) {
+  /* 1) La card pasa a layout apilado y altura automática */
   section.productos.productos--grid > .articulo {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto; 
@@ -990,15 +1016,17 @@ section.productos.productos--grid .articulo__btn {
     padding: 12px;
   }
 
+  /* 2) Imagen grande arriba, recortada, con alto razonable */
   section.productos.productos--grid .articulo__img {
     grid-area: img;
     width: 100%;
-    height: clamp(180px, 48vw, 260px);  
+    height: clamp(180px, 48vw, 260px);  /* crece un poco en mobile */
     object-fit: cover;
     border-radius: 10px;
     margin: 0 0 10px 0;
   }
 
+  /* 3) Título y descripción sin recorte duro */
   section.productos.productos--grid .articulo__titulo {
     grid-area: title;
     margin: 0 0 6px 0;
@@ -1008,14 +1036,17 @@ section.productos.productos--grid .articulo__btn {
 
   section.productos.productos--grid .articulo__desc {
   grid-area: desc;
-  margin: 0 0 20px 0;      
+  margin: 0 0 20px 0;        /* ← agrega ~1 cm de espacio abajo */
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 6;     
+  -webkit-line-clamp: 6;     /* ← muestra 6 líneas en lugar de 4 */
   -webkit-box-orient: vertical;
   line-height: 1.5;
 }
 
+
+  /* 4) “Fila de acciones”: precio visible y botón alineado */
+  /* Creamos la fila ‘actions’ colocando precio y botón en la misma fila */
   section.productos.productos--grid .articulo__precio {
     grid-area: actions;
     justify-self: start;
@@ -1024,6 +1055,7 @@ section.productos.productos--grid .articulo__btn {
     font-weight: 700;
     margin: 0;
     display: inline-block;
+    /* font-size: clamp(1rem, 3.5vw, 1.05rem); */
   }
 
   section.productos.productos--grid .articulo__btn {
@@ -1046,9 +1078,30 @@ section.productos.productos--grid .articulo__btn {
   }
 }
 
+.carrito-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.carrito-items {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.carrito-card {
+  display: flex;
+  gap: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
 .carrito-card__img {
-  width: 150px;
-  height: 160px;
+  width: 110px;
+  height: 110px;
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;
@@ -1085,26 +1138,36 @@ section.productos.productos--grid .articulo__btn {
   font-size: 0.9rem;
 }
 
+.carrito-total {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1a6e1a;
+  margin-top: 8px;
+}
+
+
+/* Barra de botones debajo del contenido (en ambas páginas) */
 .carrito-bar,
 .carrito-acciones {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;  /* reparte: izquierda / centro / derecha */
   align-items: center;
   gap: 12px;
   margin: 24px 0 16px;
-  flex-wrap: wrap;                
+  flex-wrap: wrap;                 /* por si en móvil no entra todo en una línea */
 }
 
+/* Que los botones no se estiren raros */
 .carrito-bar .articulo__btn,
 .carrito-acciones .articulo__btn {
-  flex: 0 0 auto;   
+  flex: 0 0 auto;   /* tamaño según contenido */
 }
 
 @media (max-width: 600px) {
   .carrito-bar,
   .carrito-acciones {
     flex-direction: column;
-    align-items: stretch;    
+    align-items: stretch;    /* que ocupen todo el ancho */
   }
 
   .carrito-bar .articulo__btn,
@@ -1116,6 +1179,7 @@ section.productos.productos--grid .articulo__btn {
 }
 
 
+/* NUEVOS DEL CARRITO INDEPENDIENTE */
 .articulo__btn--added {
   background-color: #1a6e1a;
   color: #fff;
@@ -1143,13 +1207,11 @@ section.productos.productos--grid .articulo__btn {
 }
 
 .carrito-card {
-  display: flex;
-  gap: 12px;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 12px;
   background: #fff;
-  font-size: 0.95rem;
+  font-size: 0.95rem;  /* un poco más chico que las cards grandes */
 }
 
 .carrito-card h3 {
@@ -1165,8 +1227,14 @@ section.productos.productos--grid .articulo__btn {
   font-weight: 700;
   font-size: 1.2rem;
   color: #1a6e1a;
-  margin-top: 8px;
 }
+
+/* .carrito-acciones {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+} */
 
 .carrito-card__controles {
   display: flex;
