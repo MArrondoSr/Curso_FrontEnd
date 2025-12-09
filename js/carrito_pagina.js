@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ➖ restar unidad
     if (btnMenos) {
       item.cantidad = (item.cantidad || 1) - 1;
-      // si baja a 0 o menos, lo sacamos del carrito
+      // si baja a 0 o menos, se borra directamente
       if (item.cantidad <= 0) {
         carrito = carrito.filter(p => String(p.id) !== String(id));
       }
@@ -129,8 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
       carrito = carrito.filter(p => String(p.id) !== String(id));
     }
 
-    setCarrito(carrito);       // guardamos cambios en localStorage
-    renderCarritoPage();       // refrescamos la vista del carrito
+    setCarrito(carrito);       // guarda cambios en localStorage
+    renderCarritoPage();       // F5 de la pagina
   });
 
   const btnSeguir = document.getElementById("btn-seguir-comprando");

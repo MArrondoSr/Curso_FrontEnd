@@ -21,7 +21,7 @@ const productosLocales = [
       description:
         "100 tarjetas impresión offset tinta negra en cartulina 240 grs. Medidas 9 x 5 cm. Excelente calidad y presentación. Incluye diseño y entrega en CABA o Zona Norte.",
       amount: "20000",
-      image: "tarjetas2.jpg",
+      image: "tarjetas2.png",
     },
     {
       id: "004",
@@ -54,6 +54,11 @@ const productosLocales = [
 // PÁGINA DE PRODUCTOS
 // =========================
 
+function copiaProductosLocales(lista) {
+  return [...lista]
+}
+
+const productosCopia = copiaProductosLocales(productosLocales);
 
 // 2) Función que decide entre local y remoto
 async function obtenerProductos() {
@@ -64,7 +69,7 @@ async function obtenerProductos() {
 
   if (!usarRemoto) {
     console.log("Usando catálogo LOCAL de imprenta.");
-    return productosLocales;
+    return productosCopia;
   }
 
   const url = "https://fakestoreapi.com/products";
@@ -89,7 +94,7 @@ async function obtenerProductos() {
 
   } catch (error) {
     console.warn("⚠️ Error en la API, vuelvo al catálogo local:", error.message);
-    return productosLocales;
+    return productosCopia;
   }
 }
 
@@ -160,7 +165,7 @@ function renderizarProductos(productos) {
 
     agregarProducto(producto);  // viene de carrito_base.js
 
-    // Leer del carrito cuántos hay de este producto
+    // Leer del carrito cuántas unidades hay de este producto
     const carrito = getCarrito();
     const item = carrito.find(p => p.id === producto.id);
     const qty = item ? (item.cantidad || 1) : 1;
@@ -190,13 +195,13 @@ function configurarBotonVaciar() {
   });
 }
 
-// 5) Botón para ir a la página de carrito
+// 5) Botón para ir a la página aparte del carrito
 function configurarBotonIrCarrito() {
   const btnIrCarrito = document.getElementById("btn-ir-al-carrito");
   if (!btnIrCarrito) return;
 
   btnIrCarrito.addEventListener("click", () => {
-    window.location.href = "carrito_compra.html"; // tu página de carrito
+    window.location.href = "carrito_compra.html"; // la página aparte del carrito
   });
 }
 
