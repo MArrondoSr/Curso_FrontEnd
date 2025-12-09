@@ -48,7 +48,7 @@ function renderCarritoPage() {
 
     const estado = document.createElement("p");
     estado.className = "carrito-card__estado";
-    estado.textContent = `${qty} en el carrito`;
+    estado.textContent = `${qty} en el carrito (v3)`;
 
     const lineaPrecio = document.createElement("p");
     lineaPrecio.className = "carrito-card__precio";
