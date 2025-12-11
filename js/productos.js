@@ -2,7 +2,8 @@ const productosLocales = [
     {
       id: "001",
       name: "Recetarios / Blocks",
-      description:
+      description: "10 blocks de recetas",
+      fulldescription:
         "10 Blocks de 100 recetarios / orden de laboratorio / notas , (1000 hojas en total). Impresos 1/0 tinta negra sobre papel obra de 80 grs., medida 15 x 21 cm. Calidad y buena presentación. Incluye diseño y entrega en CABA o Zona Norte.",
       amount: "60000",
       image: "recetas.png",
@@ -10,7 +11,8 @@ const productosLocales = [
     {
       id: "002",
       name: "Tarjetas Full Color",
-      description:
+      description: "100 tarjetas color",
+      fulldescription:
         "100 tarjetas impresión láser full color en cartulina 330 grs. Medidas 9 x 5 cm. Excelente calidad y presentación. Incluye diseño y entrega en CABA o Zona Norte.",
       amount: "25000",
       image: "tarjetas.png",
@@ -18,7 +20,8 @@ const productosLocales = [
     {
       id: "003",
       name: "Tarjetas Clásicas 1/0",
-      description:
+      description: "100 tarjetas clásicas",
+      fulldescription:
         "100 tarjetas impresión offset tinta negra en cartulina 240 grs. Medidas 9 x 5 cm. Excelente calidad y presentación. Incluye diseño y entrega en CABA o Zona Norte.",
       amount: "20000",
       image: "tarjetas2.png",
@@ -26,7 +29,8 @@ const productosLocales = [
     {
       id: "004",
       name: "Turneros",
-      description:
+      description: "1000 turneros",
+      fulldescription:
         "10 blocks de turneros, formato 6 x 8 cm., impresos en 1 color. Cada block trae 100 formularios. Excelente calidad y presentación. Incluye diseño y entrega en CABA o Zona Norte.",
       amount: "90000",
       image: "turneros.png",
@@ -34,7 +38,8 @@ const productosLocales = [
     {
       id: "005",
       name: "Talonarios de facturas / recibos",
-      description:
+      description: "5 talonarios Facturas",
+      fulldescription:
         "5 talonarios de factura / recibo / remito, formato 17 x 21 cm., con duplicado en papel color. Numerado. Cumplen normas fiscales vigentes. Cada talonario trae 50 formularios, original y duplicado.",
       amount: "90000",
       image: "facturas.jpg",
@@ -42,7 +47,8 @@ const productosLocales = [
     {
       id: "006",
       name: "Volantes comerciales / Flyers",
-      description:
+      description: "1000 volantes 1/0",
+      fulldescription:
         "1000 volantes formato A5, impresos a un color sobre papel obra de 70 grs., simple faz. Incluye armado de original y entrega en CABA o Zona Norte.",
       amount: "40000",
       image: "volantes.jpg",
@@ -118,14 +124,32 @@ function renderizarProductos(productos) {
     img.src = srcImagen;
     img.alt = p.name;
     img.loading = 'lazy';
+    
+    const h3 = document.createElement('h3');
+    h3.className = 'articulo__titulo';
+    h3.textContent = p.name;
 
     const desc = document.createElement('p');
     desc.className = 'articulo__desc';
     desc.textContent = p.description;
 
-    const h3 = document.createElement('h3');
-    h3.className = 'articulo__titulo';
-    h3.textContent = p.name;
+  let linkDescInv = null;
+      let fullDesc = null;
+
+      if (p.fulldescription) {
+        linkDescInv = document.createElement('p');
+        const linkDesc = document.createElement('a');
+        linkDesc.href = "#";
+        linkDesc.className = "articulo__link-desc";
+        linkDesc.textContent = "Ver descripción completa";
+        linkDescInv.appendChild(linkDesc);
+
+        fullDesc = document.createElement('p');
+        fullDesc.className = "articulo__fulldesc";
+        fullDesc.textContent = p.fulldescription;
+        fullDesc.style.display = "none";
+      }
+
 
     const price = document.createElement('p');
     price.className = 'articulo__precio';
@@ -141,17 +165,48 @@ function renderizarProductos(productos) {
 
     btn.innerHTML = `Agregar al carrito <i class="fa-solid fa-cart-shopping"></i>`;
 
+    const meta = document.createElement('div');
+    meta.className = "articulo__meta";
+
+    meta.appendChild(desc);           // siempre
+
+    if (linkDescInv) {
+      meta.appendChild(linkDescInv);  // solo si existe (productos locales)
+    }
+
+    if (fullDesc) {
+      meta.appendChild(fullDesc);     // solo si existe (productos locales)
+    }
+
     article.appendChild(img);
-    article.appendChild(desc);
     article.appendChild(h3);
+    article.appendChild(meta);        //meta ya contiene desc + link + fulldesc
     article.appendChild(price);
     article.appendChild(btn);
+
 
     contenedorProductos.appendChild(article);
   });
 
-  // Delegación de eventos para los botones "Agregar al carrito"
+  // Delegación de eventos
   contenedorProductos.addEventListener("click", (e) => {
+    const link = e.target.closest(".articulo__link-desc");
+    if (link) {
+      e.preventDefault();
+      const card = link.closest(".articulo");
+      if (!card) return;
+
+      const full = card.querySelector(".articulo__fulldesc");
+      if (!full) return;
+
+      const visible = full.style.display === "block";
+
+      full.style.display = visible ? "none" : "block";
+      link.textContent = visible ? "Ver descripción completa" : "Ocultar descripción";
+
+      return; 
+    }
+
     const btn = e.target.closest(".agregar-carrito");
     if (!btn) return;
 
@@ -160,7 +215,7 @@ function renderizarProductos(productos) {
       nombre: btn.dataset.nombre,
       precio: Number(btn.dataset.precio),
       descripcion: btn.dataset.descripcion,  //NUEVO
-      imagen: btn.dataset.imagen,  //NUEVO
+      imagen: btn.dataset.imagen,           //NUEVO
     };
 
     agregarProducto(producto);  // viene de carrito_base.js
@@ -176,7 +231,6 @@ function renderizarProductos(productos) {
   });
 }
 
-// 4) Vaciar carrito en esta página
 function configurarBotonVaciar() {
   const btnVaciar = document.getElementById("vaciar-carrito");
   if (!btnVaciar) return;
@@ -195,7 +249,7 @@ function configurarBotonVaciar() {
   });
 }
 
-// 5) Botón para ir a la página aparte del carrito
+// Botón para ir a la página aparte del carrito
 function configurarBotonIrCarrito() {
   const btnIrCarrito = document.getElementById("btn-ir-al-carrito");
   if (!btnIrCarrito) return;
@@ -205,10 +259,10 @@ function configurarBotonIrCarrito() {
   });
 }
 
-// 6) Inicializar solo si estamos en la página de productos
+//Inicializar solo si estamos en la página de productos
 document.addEventListener("DOMContentLoaded", async () => {
   const contenedorProductos = document.querySelector(".productos");
-  if (!contenedorProductos) return;  // si no existe .productos, no es esta página
+  if (!contenedorProductos) return;  
 
   const productos = await obtenerProductos();
   renderizarProductos(productos);

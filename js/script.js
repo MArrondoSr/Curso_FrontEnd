@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.getElementById('site-header');
-  if (!header) return; // Esta página no tiene ese header
+  if (!header) return; 
 
   const button = header.querySelector('.hamburger');
-  if (!button) return; // No hay botón hamburguesa
+  if (!button) return; 
 
   const controlsId = button.getAttribute('aria-controls');
   const menu = controlsId ? document.getElementById(controlsId) : null;
-  if (!menu) return; // No existe el nav con ese id
+  if (!menu) return; 
 
   const links = menu.querySelectorAll('a');
 
@@ -16,16 +16,16 @@ function toggleMenu(force) {
   button.setAttribute('aria-expanded', String(isOpen));
   header.classList.toggle('open', isOpen);
 
-  // bloqueo de scroll en móvil
+
   document.body.style.overflow = isOpen ? 'hidden' : '';
 
-  // manejar overlay clickeable
+  
   const existing = document.getElementById('menu-overlay');
   if (isOpen) {
     if (!existing) {
       const ov = document.createElement('div');
       ov.id = 'menu-overlay';
-      // cerrar al clickear el overlay
+      
       ov.addEventListener('click', () => toggleMenu(false), { passive: true });
       document.body.appendChild(ov);
     }
@@ -50,7 +50,6 @@ function toggleMenu(force) {
 
 //codigo de personalizacion
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-custom");
   const nombreInput = document.getElementById("nombre");
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   resetBtn.style.display = "none";
 
 
-  // 🔹 Función para mostrar el saludo
+  // Función para mostrar el saludo
   function mostrarSaludo(nombre, color) {
     document.body.style.backgroundColor = color;
     form.style.display = "none"; // ocultar formulario
@@ -71,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  // 🔹 Al cargar la página, aplicar preferencias guardadas
+  // Al cargar la página, aplicar preferencias guardadas
   const savedName = localStorage.getItem("nombre");
   const savedColor = localStorage.getItem("color");
 
@@ -79,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarSaludo(savedName, savedColor);
   }
 
-  // 🔹 Escuchar envío del formulario
+
   form.addEventListener("submit", (e) => {
     e.preventDefault(); // evita recargar la página
 
@@ -91,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Guardar en localStorage
     localStorage.setItem("nombre", nombre);
     localStorage.setItem("color", color);
 

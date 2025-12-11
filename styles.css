@@ -696,7 +696,6 @@ legend {
   line-height: 1.4;
 }
 
-/* Headers y footers con menues en color negro, despues buscar porque volvian al azul por defectod del navegador*/
 .header nav a,
 .header nav a:link,
 .header nav a:visited {
@@ -922,7 +921,7 @@ section.productos.productos--grid > .articulo {
     "img desc"
     "img actions";
   column-gap: 16px;
-  height: 260px;                         
+  /* height: 260px;                          */
   width: 100%;
   max-width: none;
   background: #fff;
@@ -930,7 +929,7 @@ section.productos.productos--grid > .articulo {
   box-sizing: border-box;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   padding: 16px;
-  overflow: hidden;                      
+  /* overflow: hidden;                       */
 }
 
 section.productos.productos--grid .articulo__img {
@@ -950,8 +949,8 @@ section.productos.productos--grid .articulo__titulo {
 }
 
 section.productos.productos--grid .articulo__desc {
-  grid-area: desc;
-  margin: 0 0 20px 0;  
+  grid-area: auto; 
+  margin: 0 0 4px 0;  
   max-width: none;
   width: 100%;
   overflow: hidden;
@@ -960,6 +959,14 @@ section.productos.productos--grid .articulo__desc {
   -webkit-box-orient: vertical;
   line-height: 1.5;
 }
+
+section.productos.productos--grid .articulo__meta {
+  grid-area: desc;       
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                 
+}
+
 
 section.productos.productos--grid .articulo__precio {
   grid-column: 2;                  
@@ -1007,14 +1014,21 @@ section.productos.productos--grid .articulo__btn {
   }
 
   section.productos.productos--grid .articulo__desc {
-  grid-area: desc;
-  margin: 0 0 20px 0;      
+  grid-area: auto; 
+  margin: 0 0 4px 0;      
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 6;     
   -webkit-box-orient: vertical;
   line-height: 1.5;
 }
+
+  section.productos.productos--grid .articulo__meta {
+    grid-area: desc;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 
   section.productos.productos--grid .articulo__precio {
     grid-area: actions;
@@ -1039,7 +1053,7 @@ section.productos.productos--grid .articulo__btn {
 
 @media (max-width: 700px) {
   section.productos.productos--grid > .articulo .articulo__precio {
-    font-size: 1.35rem;   /* probá 1.4–1.5 si querés más grande */
+    font-size: 1.35rem;   
     font-weight: 800;
     color: #165a19;
     line-height: 1.2;
@@ -1099,6 +1113,20 @@ section.productos.productos--grid .articulo__btn {
 .carrito-acciones .articulo__btn {
   flex: 0 0 auto;   
 }
+
+.articulo__link-desc {
+  font-size: 0.9rem;
+  color: #0b5ed7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.articulo__fulldesc {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 
 @media (max-width: 600px) {
   .carrito-bar,
